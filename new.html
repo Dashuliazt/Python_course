@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript">AP_Brushes = {"php":"PHP","css":"CSS","xml":"XML\/HTML","jscript":"Javascript","sql":"SQL","bash":"Bash\/Shell","clojure":"Clojure","cpp":"C++\/C","csharp":"C#","delphi":"Delphi","diff":"Diff","erlang":"Erlang","fsharp":"F#","groovy":"Groovy","java":"Java","javafx":"JavaFX","latex":"Latex","plain":"Plain text","matlab":"Matlabkey","objc":"Object","perl":"Perl","powershell":"PowerShell","python":"Python","r":"R","ruby":"Ruby\/Rails","scala":"Scala","vb":"VisualBasic"};</script>
+	<!-- This site is optimized with the Yoast SEO plugin v15.4 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Работа с датой и временем в Python</title>
+	<meta name="description" content="Инструменты для работы с датой и временем в Python. Модули datetime и time. Python может представлять даты различными способами." />
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://python-scripts.com/datetime-time-python" />
+	<meta property="og:locale" content="ru_RU" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Работа с датой и временем в Python" />
+	<meta property="og:description" content="Инструменты для работы с датой и временем в Python. Модули datetime и time. Python может представлять даты различными способами." />
+	<meta property="og:url" content="https://python-scripts.com/datetime-time-python" />
+	<meta property="og:site_name" content="Python 3" />
+	<meta property="article:published_time" content="2017-04-04T21:21:19+00:00" />
+	<meta property="article:modified_time" content="2017-11-25T00:12:29+00:00" />
+	<meta property="og:image" content="https://python-scripts.com/wp-content/uploads/2017/04/datetime-python.jpg" />
+	<meta property="og:image:width" content="740" />
+	<meta property="og:image:height" content="462" />
+	<meta name="twitter:label1" content="Написано автором">
+	<meta name="twitter:data1" content="Monty Python">
+	<meta name="twitter:label2" content="Примерное время для чтения">
+	<meta name="twitter:data2" content="2 минуты">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://python-scripts.com/#website","url":"https://python-scripts.com/","name":"Python 3","description":"","potentialAction":[{"@type":"SearchAction","target":"https://python-scripts.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"ImageObject","@id":"https://python-scripts.com/datetime-time-python#primaryimage","inLanguage":"ru-RU","url":"https://python-scripts.com/wp-content/uploads/2017/04/datetime-python.jpg","width":740,"height":462},{"@type":"WebPage","@id":"https://python-scripts.com/datetime-time-python#webpage","url":"https://python-scripts.com/datetime-time-python","name":"\u0420\u0430\u0431\u043e\u0442\u0430 \u0441 \u0434\u0430\u0442\u043e\u0439 \u0438 \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c \u0432 Python","isPartOf":{"@id":"https://python-scripts.com/#website"},"primaryImageOfPage":{"@id":"https://python-scripts.com/datetime-time-python#primaryimage"},"datePublished":"2017-04-04T21:21:19+00:00","dateModified":"2017-11-25T00:12:29+00:00","author":{"@id":"https://python-scripts.com/#/schema/person/7f1b5d32d436095a75f89c04175c38ee"},"description":"\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u0434\u0430\u0442\u043e\u0439 \u0438 \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c \u0432 Python. \u041c\u043e\u0434\u0443\u043b\u0438 datetime \u0438 time. Python \u043c\u043e\u0436\u0435\u0442 \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c \u0434\u0430\u0442\u044b \u0440\u0430\u0437\u043b\u0438\u0447\u043d\u044b\u043c\u0438 \u0441\u043f\u043e\u0441\u043e\u0431\u0430\u043c\u0438.","inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://python-scripts.com/datetime-time-python"]}]},{"@type":"Person","@id":"https://python-scripts.com/#/schema/person/7f1b5d32d436095a75f89c04175c38ee","name":"Monty Python","image":{"@type":"ImageObject","@id":"https://python-scripts.com/#personlogo","inLanguage":"ru-RU","url":"https://secure.gravatar.com/avatar/1ba0be86b988c5907addb9c46278d8bf?s=96&d=https%3A%2F%2Fpython-scripts.com%2Fwp-content%2Fuploads%2Fap_avatars%2F1ba0be86b988c5907addb9c46278d8bf.jpg&r=g","caption":"Monty Python"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='stylesheet' id='crayon-css'  href='https://python-scripts.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-raygun-css'  href='https://python-scripts.com/wp-content/plugins/crayon-syntax-highlighter/themes/raygun/raygun.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-droid-sans-mono-css'  href='https://python-scripts.com/wp-content/plugins/crayon-syntax-highlighter/fonts/droid-sans-mono.css' type='text/css' media='all' />
+<link rel='stylesheet' id='ye_dynamic-css'  href='https://python-scripts.com/wp-content/plugins/youtube-embed/css/main.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='https://python-scripts.com/wp-content/plugins/anspress-question-answer//addons/syntaxhighlighter/syntaxhighlighter/styles/shCore.css' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='https://python-scripts.com/wp-content/plugins/anspress-question-answer//addons/syntaxhighlighter/syntaxhighlighter/styles/shThemeDefault.css' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='https://python-scripts.com/wp-content/themes/yelly/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='child-style-css'  href='https://python-scripts.com/wp-content/themes/yelly-child/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&#038;subset=cyrillic' type='text/css' media='all' />
+<link rel='stylesheet' id='revelation-style-css'  href='https://python-scripts.com/wp-content/themes/yelly/css/style.min.css' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='vc_lte_ie9-css'  href='https://python-scripts.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css' type='text/css' media='screen' />
+<![endif]-->
+<link rel='stylesheet' id='js_composer_custom_css-css'  href='//python-scripts.com/wp-content/uploads/js_composer/custom.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-color-picker-css'  href='https://python-scripts.com/wp-admin/css/color-picker.min.css' type='text/css' media='all' />
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/jquery.js' id='jquery-core-js'></script>
+<script type='text/javascript' id='crayon_js-js-extra'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/python-scripts.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js' id='crayon_js-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/remove-disqus-ads/assets/js/frontend.js' id='remove_disqus_ads-frontend-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/wp-hide-post/public/js/wp-hide-post-public.js' id='wp-hide-post-js'></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><script charset="UTF-8" src="//cdn.sendpulse.com/js/push/cfbae0c7e5ef833a5b27cb0f3f58354e_1.js" async></script>
+<meta name="verify-admitad" content="a1d884e352" /><style>body { font-family: "Roboto", Arial, "Helvetica Neue", Helvetica, Arial, sans-serif; }.entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6, .entry-image__title h1, .entry-title { font-family: "Roboto", Arial, "Helvetica Neue", Helvetica, Arial, sans-serif; }@media (min-width: 576px) { .entry-content { font-size: 15px;} }@media (min-width: 768px) { .post-box .entry-title { font-size: 22px;} }@media (min-width: 768px) { .related-articles .post-box .entry-title { font-size: 22px;} }@media (min-width: 576px) { .entry-content { line-height: 1.5;} }.site-header, .main-navigation .sub-menu, .menu-wide {background:#343c55;}.site-header,.main-navigation ul li a, .site-header,.main-navigation ul li a, .header-search .fa {color:#ffffff;}.header-search input {box-shadow: 0 0 1px #ffffff;}.main-navigation ul li.menu-item-has-children:after {border-color: #ffffff transparent transparent transparent;}.site-footer {background:#343c55;}.site-footer, .site-footer a {color:#ffffff;}</style><meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
+<link rel="icon" href="https://python-scripts.com/wp-content/uploads/2016/09/python.png" sizes="32x32" />
+<link rel="icon" href="https://python-scripts.com/wp-content/uploads/2016/09/python.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://python-scripts.com/wp-content/uploads/2016/09/python.png" />
+<meta name="msapplication-TileImage" content="https://python-scripts.com/wp-content/uploads/2016/09/python.png" />
+<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<style></style><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script></head>
+
+<body class="post-template-default single single-post postid-2018 single-format-image group-blog wpb-js-composer js-comp-ver-6.0.5 vc_responsive">
+
+
+<a class="skip-link screen-reader-text" href="#main">Перейти к контенту</a>
+
+
+
+
+
+<header id="masthead" class="site-header">
+    <div class="site">
+        <div class="site-branding">
+
+                            <p class="site-title"><a href="https://python-scripts.com/" rel="home">Python 3</a></p>
+                        </div><!-- .site-branding -->
+
+        <div class="menu-toggle"></div>
+        <nav id="site-navigation" class="main-navigation">
+            <div class="menu-menu-container"><ul id="primary-menu" class="menu"><li id="menu-item-29407" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-29407"><a href="https://python-scripts.com/install-python">Скачать Python</a></li>
+<li id="menu-item-2759" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-2759"><a href="https://python-scripts.com/pycharm-download">Скачать PyCharm</a></li>
+<li id="menu-item-34046" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-34046"><a href="https://python-scripts.com/tkinter">Tkinter</a></li>
+<li id="menu-item-19407" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19407"><a href="https://python-scripts.com/forum">Форум</a></li>
+<li id="menu-item-1850" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1850"><a href="https://python-scripts.com/books">Книги</a></li>
+<li id="menu-item-2017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2017"><a href="/contact">Контакты</a></li>
+</ul></div>        </nav><!-- #site-navigation -->
+		
+                <div class="header-search">
+
+            <form role="search" method="get" id="searchform" action="https://python-scripts.com/" >
+                <input type="text" value="" name="s" id="s" />
+                <button type="submit"><span class="fa fa-search"></span></button>
+            </form>
+
+        </div>
+            </div>
+</header><!-- #masthead -->
+
+
+
+<div id="page" class="site">
+
+    <div class="r-bl"><!-- PyScripts - Top Banner Under Menu -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="1912846732"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>	
+	
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" itemscope itemtype="http://schema.org/Article">
+
+			
+			
+<article id="post-2018" class="post-2018 post type-post status-publish format-image has-post-thumbnail  category-learn-python-easy-lessons post_format-post-format-image">
+	<header class="entry-header">
+				<h1 class="entry-title post-title" itemprop="headline">Работа с датой и временем в Python</h1>		
+		
+	</header><!-- .entry-header -->
+
+    
+
+	<div class="r-bl"><!-- PyScripts - Links under article -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="4235256386"
+     data-ad-format="link"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+	            <div class="post-image">
+            <img width="740" height="462" src="https://python-scripts.com/wp-content/uploads/2017/04/datetime-python.jpg" class="wp-image wp-post-image" alt="" loading="lazy" itemprop="image" srcset="https://python-scripts.com/wp-content/uploads/2017/04/datetime-python.jpg 740w, https://python-scripts.com/wp-content/uploads/2017/04/datetime-python-300x187.jpg 300w, https://python-scripts.com/wp-content/uploads/2017/04/datetime-python-768x480.jpg 768w, https://python-scripts.com/wp-content/uploads/2017/04/datetime-python-678x424.jpg 678w" sizes="(max-width: 740px) 100vw, 740px" />        </div>
+    	
+	<div class="entry-content" itemprop="articleBody">
+		<p>Python содержит несколько инструментов, которые разработчик может использовать для <strong>работы с датой и временем</strong>. В данном разделе статье мы рассмотрим модули <strong>datetime</strong> и <strong>time</strong>. Мы изучим принципы их работы и способы их применения. Начнем с модуля <strong>datetime</strong>.</p>
+<h2>Модуль datetime</h2>
+<p>Мы изучим следующие классы модуля:</p>
+<ul>
+<li>datetime.date</li>
+<li>datetime.timedelta</li>
+<li>datetime.datetime</li>
+</ul>
+<p>Благодаря этим классам мы в будущем сможем работать с большей частью случаев, в которых нам понадобятся объекты <strong>date</strong> и <strong>datetime</strong>. Также существует класс <strong>tzinfo</strong>, который применяется для работы с часовыми поясами. Для дополнительной информации об этом классе вы можете обратиться к <a href="https://docs.python.org/2/library/datetime.html" target="_blank" rel="noopener">документации Python</a>.</p>
+<h2>datetime.date</h2>
+<p>Python может представлять даты различными способами. Для начала, рассмотрим формат <strong>datetime.date</strong>, так как это один из самых простых объектов <strong>date</strong>.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dfef1313032319" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+print( datetime.date(2012, 13, 14) )
+
+Traceback (most recent call last):
+    File "&lt;string&gt;", line 1, in &lt;fragment&gt;
+builtins.ValueError: month must be in 1..12</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dfef1313032319-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dfef1313032319-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dfef1313032319-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dfef1313032319-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dfef1313032319-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dfef1313032319-1"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">date</span><span class="crayon-sy">(</span><span class="crayon-cn">2012</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">13</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">14</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dfef1313032319-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dfef1313032319-3"><span class="crayon-k ">Traceback</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">most </span><span class="crayon-e">recent </span><span class="crayon-e">call </span><span class="crayon-v">last</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dfef1313032319-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">File</span><span class="crayon-h"> </span><span class="crayon-s">"&lt;string&gt;"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">line</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">fragment</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5fcfcbd5dfef1313032319-5"><span class="crayon-v">builtins</span><span class="crayon-sy">.</span><span class="crayon-k ">ValueError</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">month </span><span class="crayon-e">must </span><span class="crayon-e">be </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-cn">1..12</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dfef9136693637" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+print(datetime.date(2012, 12, 14)) # datetime.date(2012, 12, 14)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dfef9136693637-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dfef9136693637-1"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">date</span><span class="crayon-sy">(</span><span class="crayon-cn">2012</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">14</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.date(2012, 12, 14)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p>В данном коде показано, как создать простой объект даты. <a href="https://python-scripts.com/datetime-time-python">Класс date</a> принимает три аргумента: год, месяц и день. Если вы укажите неправильное значение, вы увидите ошибку <a href="https://python-scripts.com/try-except-finally">ValueError</a>, как в случае выше. В противном случае вы увидите, что объект <strong>datetime.date</strong> вернулся. Давайте взглянем на еще один пример:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dfefd446150317" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+d = datetime.date(2012, 12, 14)
+
+print(d.year) # 2012
+print(d.day)  # 14
+print(d.month) # 12</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dfefd446150317-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dfefd446150317-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dfefd446150317-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dfefd446150317-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dfefd446150317-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dfefd446150317-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dfefd446150317-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dfefd446150317-2"><span class="crayon-v">d</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">date</span><span class="crayon-sy">(</span><span class="crayon-cn">2012</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">14</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dfefd446150317-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dfefd446150317-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">year</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 2012</span></div><div class="crayon-line" id="crayon-5fcfcbd5dfefd446150317-5"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">day</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c"># 14</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dfefd446150317-6"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">month</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 12</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p><div style="padding-top: 30px; padding-bottom: 30px;">
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="7817748333"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+<p>Здесь мы присваиваем объекту <strong>date</strong> переменную <strong>d</strong>. Теперь мы можем получить доступ к различным компонентам даты по названиям, таким как <strong>d.year</strong> или <strong>d.month</strong>. Давайте посмотрим, какой сейчас день:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff00344224042" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+
+print(datetime.date.today()) # datetime.date(2017, 4, 5)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff00344224042-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff00344224042-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff00344224042-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff00344224042-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff00344224042-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff00344224042-3"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-v">date</span><span class="crayon-sy">.</span><span class="crayon-e">today</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.date(2017, 4, 5)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p>Это может быть полезно, когда вам нужно записать, какой сейчас день. Или, если вам нужно выполнить основанный на сегодняшней дате расчет. Мелочь, а приятно.</p>
+<h2>datetime.datetime</h2>
+<p>Объект <a href="https://python-scripts.com/datetime-time-python">datetime</a>.datetime содержит всю информацию объектов <strong>datetime.date</strong> плюс <strong>datetime.time</strong>. Давайте приведем несколько примеров, для лучшего понимания разницы между этим объектом, и объектом <strong>datetime.date</strong>.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff03002256182" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+
+a = datetime.datetime(2017, 3, 5)
+print(a) # datetime.datetime(2017, 3, 5, 0, 0)
+
+b = datetime.datetime(2017, 3, 5, 12, 30, 10)
+print(b) # datetime.datetime(2017, 3, 5, 12, 30, 10)
+
+d = datetime.datetime(2017, 3, 5, 12, 30, 10)
+print(d.year) # 2017
+print(d.second) # 10
+print(d.hour) # 12</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-6">6</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-8">8</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-10">10</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff03002256182-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff03002256182-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-3"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">(</span><span class="crayon-cn">2017</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.datetime(2017, 3, 5, 0, 0)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-6"><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">(</span><span class="crayon-cn">2017</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">30</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-7"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">b</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.datetime(2017, 3, 5, 12, 30, 10)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-8">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-9"><span class="crayon-v">d</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">(</span><span class="crayon-cn">2017</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">30</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-10"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">year</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 2017</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff03002256182-11"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">second</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 10</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff03002256182-12"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">d</span><span class="crayon-sy">.</span><span class="crayon-v">hour</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 12</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p>Мы видим, что <strong>datetime.datetime</strong> принимает несколько дополнительных аргументов: <em>год, месяц, день, час, минута и секунда</em>. Это также позволяет вам указывать информацию о <strong>микросекундах</strong> и <strong>часовом поясе</strong>. При работе с базами данных, данные типы объектов будут использоваться достаточно часто. Большую часть вашей работы, вам нужно будет конвертировать форматы <strong>date</strong> или <a href="https://python-scripts.com/datetime-time-python">datetime Python</a> в форматы <strong>SQL datetime</strong> или timestamp. Обратите внимание на то, что <strong>today</strong> совместно с datetime.datetime использует два разных метода:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff0b001249559" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+
+a = datetime.datetime.today()
+print(a) # datetime.datetime(2017, 4, 5, 0, 16, 54, 989663)
+
+b = datetime.datetime.now()
+print(b) # datetime.datetime(2017, 4, 5, 0, 17, 8, 24239)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff0b001249559-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0b001249559-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0b001249559-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0b001249559-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0b001249559-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0b001249559-6">6</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0b001249559-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff0b001249559-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0b001249559-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff0b001249559-3"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">today</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0b001249559-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.datetime(2017, 4, 5, 0, 16, 54, 989663)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff0b001249559-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0b001249559-6"><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">now</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff0b001249559-7"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">b</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># datetime.datetime(2017, 4, 5, 0, 17, 8, 24239)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p><strong>Модуль datetime</strong> содержит другой метод, под названием <strong>strftime</strong>. Этот метод позволяет разработчику создавать строку, отображающую время в более понятной для человека форме. Существует целая таблица параметров форматирования, с которой рекомендуется ознакомиться в документации Python, в <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior" target="_blank" rel="noopener">секции 8.1.7</a>. Давайте взглянем на несколько примеров, показывающих всю полезность данного метода:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff0f973567253" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+
+a = datetime.datetime.today().strftime("%Y%m%d")
+print(a) # '20170405'
+
+today = datetime.datetime.today()
+print( today.strftime("%m/%d/%Y") ) # '04/05/2017'
+
+print( today.strftime("%Y-%m-%d-%H.%M.%S") ) # 2017-04-05-00.18.00</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff0f973567253-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0f973567253-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0f973567253-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0f973567253-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0f973567253-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0f973567253-6">6</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0f973567253-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff0f973567253-8">8</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff0f973567253-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff0f973567253-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0f973567253-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff0f973567253-3"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">today</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">strftime</span><span class="crayon-sy">(</span><span class="crayon-s">"%Y%m%d"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0f973567253-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># '20170405'</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff0f973567253-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0f973567253-6"><span class="crayon-v">today</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">today</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff0f973567253-7"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">today</span><span class="crayon-sy">.</span><span class="crayon-e">strftime</span><span class="crayon-sy">(</span><span class="crayon-s">"%m/%d/%Y"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># '04/05/2017'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff0f973567253-8">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff0f973567253-9"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">today</span><span class="crayon-sy">.</span><span class="crayon-e">strftime</span><span class="crayon-sy">(</span><span class="crayon-s">"%Y-%m-%d-%H.%M.%S"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 2017-04-05-00.18.00</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Первый пример – это скорее хитрость. В нем показано, как конвертировать сегодняшний <strong>объект datetime в строку</strong>, следующую за форматом <strong>YYYYMMDD</strong> (ГГГГММДД). Второй пример более наглядный.</p>
+<div style="padding-bottom: 15px;">
+
+<noindex>
+
+<div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-4 vc_col-has-fill"><div class="vc_column-inner vc_custom_1600070905017"><div class="wpb_wrapper"><div class="vc_icon_element vc_icon_element-outer vc_icon_element-align-center vc_icon_element-have-style"><div class="vc_icon_element-inner vc_icon_element-color-green vc_icon_element-have-style-inner vc_icon_element-size-lg vc_icon_element-style-rounded vc_icon_element-background vc_icon_element-background-color-grey" ><span class="vc_icon_element-icon fa fa-question-circle" ></span></div></div>
+	<div class="wpb_text_column wpb_content_element " >
+		<div class="wpb_wrapper">
+			<p style="text-align: center;"><strong>Есть вопросы по Python?</strong></p>
+<p style="text-align: center;">На нашем форуме вы можете задать любой вопрос и получить ответ от всего нашего сообщества!</p>
+
+		</div>
+	</div>
+<div class="vc_btn3-container vc_btn3-center" ><a class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-rounded vc_btn3-style-modern vc_btn3-block vc_btn3-icon-left vc_btn3-color-mulled-wine" href="https://itfy.org/" title="" target="_blank" rel="nofollow"><i class="vc_btn3-icon fa fa-share-square-o"></i> Python Форум Помощи</a></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-4 vc_col-has-fill"><div class="vc_column-inner vc_custom_1600071246022"><div class="wpb_wrapper"><div class="vc_icon_element vc_icon_element-outer vc_icon_element-align-center vc_icon_element-have-style"><div class="vc_icon_element-inner vc_icon_element-color-sky vc_icon_element-have-style-inner vc_icon_element-size-lg vc_icon_element-style-rounded vc_icon_element-background vc_icon_element-background-color-grey" ><span class="vc_icon_element-icon fa fa-telegram" ></span></div></div>
+	<div class="wpb_text_column wpb_content_element " >
+		<div class="wpb_wrapper">
+			<p style="text-align: center;"><strong>Telegram Чат &amp; Канал</strong></p>
+<p style="text-align: center;">Вступите в наш дружный <strong>чат по Python</strong> и начните общение с единомышленниками! Станьте частью большого сообщества!</p>
+
+		</div>
+	</div>
+<div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="vc_btn3-container vc_btn3-center" ><a class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-rounded vc_btn3-style-modern vc_btn3-block vc_btn3-icon-left vc_btn3-color-sky" href="https://telegram.im/@python_scripts?lang=ru" title="" target="_blank" rel="nofollow"><i class="vc_btn3-icon fa fa-comments"></i> Чат</a></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="vc_btn3-container vc_btn3-center" ><a class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-rounded vc_btn3-style-modern vc_btn3-block vc_btn3-color-sky" href="https://telegram.im/@pip_install?lang=ru" title="" target="_blank" rel="nofollow">Канал</a></div></div></div></div></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-4 vc_col-has-fill"><div class="vc_column-inner vc_custom_1600071543031"><div class="wpb_wrapper"><div class="vc_icon_element vc_icon_element-outer vc_icon_element-align-center vc_icon_element-have-style"><div class="vc_icon_element-inner vc_icon_element-color-peacoc vc_icon_element-have-style-inner vc_icon_element-size-lg vc_icon_element-style-rounded vc_icon_element-background vc_icon_element-background-color-grey" ><span class="vc_icon_element-icon fa fa-vk" ></span></div></div>
+	<div class="wpb_text_column wpb_content_element " >
+		<div class="wpb_wrapper">
+			<p style="text-align: center;"><strong>Паблик VK</strong></p>
+<p style="text-align: center;">Одно из самых больших сообществ по Python в социальной сети ВК. <strong>Видео уроки и книги</strong> для вас!</p>
+
+		</div>
+	</div>
+<div class="vc_btn3-container vc_btn3-center" ><a class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-rounded vc_btn3-style-modern vc_btn3-block vc_btn3-icon-left vc_btn3-color-violet" href="https://vk.com/open_sourcecode" title="" target="_blank" rel="nofollow"><i class="vc_btn3-icon fa fa-vk"></i> Подписаться</a></div></div></div></div></div>
+
+</noindex>
+
+<div style="padding-top: 30px; padding-bottom: 30px;">
+
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="7817748333"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+</div>
+<p>В нем мы присваиваем объект <strong>datetime</strong> переменной под названием today и применяем два разных параметра форматирования строки. Первый параметр добавляет косые черточки между элементами datetime, а также перегруппировывает datetime, теперь он делится на месяц, день и год. В последнем примере мы создаем временную отметку, которая следует типичному формату: YYYY-MM-DD.HH.MM.SS. Если вам нужно указать год как двухзначный (“YY”), вы можете заменить %Y на %y.</p>
+<h2>datetime.timedelta</h2>
+<p>Объект <strong>datetime.timedelta</strong> отображает длительность времени. Другими словами, это <strong>разница между двумя датами</strong> или временными отметками. Давайте взглянем на наглядный пример:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff13211196732" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import datetime
+
+# Значение: datetime.datetime(2017, 4, 5, 0, 18, 51, 980187)
+now = datetime.datetime.now()
+
+then = datetime.datetime(2017, 2, 26)
+
+# Кол-во времени между датами.
+delta = now - then
+
+print(delta.days) # 38
+print(delta.seconds) # 1131</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-6">6</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-8">8</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-10">10</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff13211196732-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff13211196732-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-3"><span class="crayon-c"># Значение: datetime.datetime(2017, 4, 5, 0, 18, 51, 980187)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-4"><span class="crayon-v">now</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-e">now</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-6"><span class="crayon-v">then</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">datetime</span><span class="crayon-sy">.</span><span class="crayon-k ">datetime</span><span class="crayon-sy">(</span><span class="crayon-cn">2017</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">26</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-8"><span class="crayon-c"># Кол-во времени между датами.</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-9"><span class="crayon-v">delta</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">now</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-e">then</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-10">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff13211196732-11"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">delta</span><span class="crayon-sy">.</span><span class="crayon-v">days</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 38</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff13211196732-12"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">delta</span><span class="crayon-sy">.</span><span class="crayon-v">seconds</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 1131</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Мы создали два <strong>объекта datetime</strong>. Один указывает на сегодняшний день, второй – на прошедшую неделю. После этого, мы берем разницу между ними. Это возвращает <strong>объект timedelta</strong>, который мы можем далее использовать, чтобы выяснить, сколько прошло дней или секунд, между этими двумя датами. Если вам нужно узнать количество часов или минут между двумя датами, вам понадобится немножко математики, чтобы выяснить это. Давайте взглянем на проверенный способ:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff17945534270" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+seconds = delta.total_seconds()
+hours = seconds // 3600
+
+print(hours) # 186.0
+
+minutes = (seconds % 3600) // 60
+print(minutes) # 13.0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff17945534270-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff17945534270-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff17945534270-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff17945534270-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff17945534270-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff17945534270-6">6</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff17945534270-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff17945534270-1"><span class="crayon-v">seconds</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">delta</span><span class="crayon-sy">.</span><span class="crayon-e">total_seconds</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff17945534270-2"><span class="crayon-v">hours</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">seconds</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">3600</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff17945534270-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff17945534270-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">hours</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 186.0</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff17945534270-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff17945534270-6"><span class="crayon-v">minutes</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">seconds</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-cn">3600</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">60</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff17945534270-7"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">minutes</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 13.0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Отсюда мы узнаем, что в неделе 186 часов и 13 минут. Обратите внимание на то, что мы используем двойную косую черту в качестве нашего <strong>оператора деления</strong>, также известного как <strong>floor division</strong>. Теперь мы готовы к тому, чтобы узнать больше о модуле <a href="https://python-scripts.com/datetime-time-python">time Python</a>.</p>
+<h2>Модуль time</h2>
+<p><a href="https://python-scripts.com/datetime-time-python">Модуль time</a> открывает разработчику Python доступ к нескольким связанным со временем функциям. Модуль основан на «эпохе», точке, с которой начинается время. Для систем Unix, эпоха началась в 1970 году. Чтобы узнать, какая эпоха в вашей системе, попробуйте запустить следующий код:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff1a854967137" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+print(time.gmtime(0))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff1a854967137-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff1a854967137-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff1a854967137-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff1a854967137-2"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">gmtime</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p>Результат</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff1d335408757" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=0, tm_min=0, tm_sec=\
+0, tm_wday=3, tm_yday=1, tm_isdst=0)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff1d335408757-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff1d335408757-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff1d335408757-1"><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">struct_time</span><span class="crayon-sy">(</span><span class="crayon-v">tm_year</span><span class="crayon-o">=</span><span class="crayon-cn">1970</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_mon</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_mday</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_hour</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_min</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_sec</span><span class="crayon-o">=</span><span class="crayon-sy">\</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff1d335408757-2"><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_wday</span><span class="crayon-o">=</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_yday</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tm_isdst</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Я запустил его на <strong>Windows 7</strong>, которая также уверена в том, что начало времен датируется 1970м годом. В любом случае, в данном разделе мы ознакомимся со следующими функциями:</p>
+<ul>
+<li>time.ctime</li>
+<li>time.sleep</li>
+<li>time.strftime</li>
+<li>time.time</li>
+</ul>
+<p>Приступим!</p>
+<div style="padding-bottom: 15px;">
+
+<div style="padding-top: 30px; padding-bottom: 30px;">
+
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="7817748333"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+</div>
+<h2>time.ctime</h2>
+<p>Функция <strong>time.ctime</strong> конвертирует <strong>время в секунды</strong>, начиная с эпохи, в строку, показывающую местное время. Если вы ничего не передадите данной функции, то настоящее время вернется обратно. Давайте взглянем на несколько примеров:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff20218067587" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+print(time.ctime()) # 'Wed Apr 5 00:02:49 2017'
+
+print(time.ctime(1384112639)) # 'Sun Nov 10 13:43:59 2013'</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff20218067587-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff20218067587-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff20218067587-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff20218067587-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff20218067587-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff20218067587-2"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">ctime</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 'Wed Apr 5 00:02:49 2017'</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff20218067587-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff20218067587-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">ctime</span><span class="crayon-sy">(</span><span class="crayon-cn">1384112639</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 'Sun Nov 10 13:43:59 2013'</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>В данном коде мы показали результаты вызова функции <strong>time.ctime</strong>, как со случайным набором секунд, начиная с эпохи, так и с пустным значением. Это можно применить, к примеру, в том случае, кода кому-нибудь нужно <strong>сохранить дату в секундах</strong>, начиная с эпохи, после чего конвертировать это в более удабриваемый формат. Немного проще, сохранить большое целое число (или длинное) в базу данных, чем страдать над ним, форматируя объект datetime в какой-либо объект даты, который принимает база данных. Конечно, это также имеет свой недостаток: вам, возможно, нужно будет преобразовать целое число или значение с плавающей запятой обратно в строку.</p>
+<h2>time.sleep</h2>
+<p>Функция <strong>time.sleep</strong> дает разработчику возможность <strong>приостановить выполнение его скрипта</strong> на определенное количество секунд. Это можно сравнить с добавлением функции «<strong>Пауза</strong>» в вашу программу. Я нашел этот класс особенно полезным, когда мне нужно было подождать несколько секунд, пока закроется файл, или база данных закончит выполнять свою задачу. Давайте взглянем на пример. Откройте новое окно в IDLE и сохраните следующий код:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff2f417232768" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+
+for x in range(5):
+    time.sleep(2)
+    print("Slept for 2 seconds")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff2f417232768-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff2f417232768-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff2f417232768-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff2f417232768-4">4</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff2f417232768-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff2f417232768-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff2f417232768-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff2f417232768-3"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-k ">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff2f417232768-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">sleep</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5fcfcbd5dff2f417232768-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Slept for 2 seconds"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>Теперь запустите этот код в IDLE. Сделав это, вы увидите фразу «<strong>Slept for 2 seconds</strong>» пять раз, с интервалом в 2 секунды между каждым сообщением. Это очень легко в использовании!</p>
+<h2>time.strftime</h2>
+<p>Модуль <strong>time</strong> имеет функцию <strong>strftime</strong>, которая работает по схожему с версией datetime принципу. Разница заключается, главным образом, в том, что именно она принимает для ввода: кортеж, или объект <strong>struct_time</strong>, вроде тех, которые возвращаются после вызова <strong>time.gmtime</strong>() или <strong>time.localtime</strong>(). Вот небольшой пример:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff33735199827" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+
+a = time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime())
+print(a) # '2017-04-05-00.11.20'</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff33735199827-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff33735199827-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff33735199827-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff33735199827-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff33735199827-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff33735199827-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff33735199827-3"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">strftime</span><span class="crayon-sy">(</span><span class="crayon-s">"%Y-%m-%d-%H.%M.%S"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">localtime</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff33735199827-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># '2017-04-05-00.11.20'</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>Этот код очень похож на код временной отметки, который мы создавали в разделе <strong>datetime</strong>. На мой взгляд, метод datetime более интуитивен при создании объекта datetime.datetime а затем при вызове его метода <strong>strftime</strong> в том формате, который вам более удобен. С модулем <strong>time</strong>, вам нужно передать формат и кортеж времени. На самом деле выбор за вами, каким именно способом вам будет удобнее решить вашу задачу.</p>
+<h2>time.time</h2>
+<p>Функция <strong>time.time</strong> отображает время в секундах, начиная с эпохи, как число с плавающей запятой. Давайте взглянем:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff36039540206" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+
+x = time.time()
+print(x) # 1491340367.478385</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff36039540206-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff36039540206-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff36039540206-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff36039540206-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff36039540206-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff36039540206-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff36039540206-3"><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-k ">time</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff36039540206-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># 1491340367.478385</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p>Весьма просто. Вы можете использовать данную функцию, когда вам нужно сохранить настоящее время в базу данных, но вам не нужно конвертировать его в метод <strong>datetime</strong> вашей базы данных. Вы можете вспомнить о том, что метод ctime принимает время в секундах, так что мы можем использовать <strong>time.time</strong> для получения количества секунд для передачи их ctime, вот так:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5fcfcbd5dff3c030099597" class="crayon-syntax crayon-theme-raygun crayon-font-droid-sans-mono crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 15px !important; line-height: 20px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Python</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 15px !important; line-height: 20px !important;">
+import time
+
+a = time.ctime(time.time())
+print(a) # Wed Apr 5 00:13:47 2017</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5fcfcbd5dff3c030099597-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff3c030099597-2">2</div><div class="crayon-num" data-line="crayon-5fcfcbd5dff3c030099597-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5fcfcbd5dff3c030099597-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5fcfcbd5dff3c030099597-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-k ">time</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff3c030099597-2">&nbsp;</div><div class="crayon-line" id="crayon-5fcfcbd5dff3c030099597-3"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-e">ctime</span><span class="crayon-sy">(</span><span class="crayon-k ">time</span><span class="crayon-sy">.</span><span class="crayon-k ">time</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5fcfcbd5dff3c030099597-4"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c"># Wed Apr 5 00:13:47 2017</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>Если вы <a href="https://docs.python.org/2/library/time.html" target="_blank" rel="noopener">обратитесь к документации</a>, чтобы узнать больше о модуле time, или если вы хотите немного поэкспериментировать, вы найдете несколько способов использования данной функции.</p>
+<h2>Подведем итоги</h2>
+<p>С этого момента вы готовы работать с датой и временем в стандартных модулях Python. Работая в Python, вы получаете широкий спектр возможностей при работе с датами. Вы найдете данные модули полезными, особенно при разработке приложения, которое отслеживает встречи, или должно срабатывать в определенные дни. Также они весьма полезны при работе с базами данных.</p>	</div><!-- .entry-content -->
+
+    </article><!-- #post-## -->
+
+<meta itemprop="author" content="Monty Python"/>
+<meta itemprop="datePublished" content="2017-04-05T00:21:19+03:00"/>
+<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="https://python-scripts.com/datetime-time-python" content="Работа с датой и временем в Python">
+<meta itemprop="dateModified" content="2017-11-25">
+
+
+
+<div class="r-bl"><!-- Yandex.RTB R-A-457373-2 -->
+<div id="yandex_rtb_R-A-457373-2"></div>
+<script type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-457373-2",
+                renderTo: "yandex_rtb_R-A-457373-2",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+</script></div>
+
+
+
+
+
+    <div class="b-sharing"></div>
+
+
+
+
+
+
+
+
+
+
+<div id="disqus_thread"></div>
+<script>
+    var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.17"},"disqusIdentifier":"2018 https:\/\/python-scripts.com\/?p=2018","disqusShortname":"python-scripts-1","disqusTitle":"\u0420\u0430\u0431\u043e\u0442\u0430 \u0441 \u0434\u0430\u0442\u043e\u0439 \u0438 \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c \u0432 Python","disqusUrl":"https:\/\/python-scripts.com\/datetime-time-python","postId":2018};
+    var disqus_url = embedVars.disqusUrl;
+var disqus_identifier = embedVars.disqusIdentifier;
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = embedVars.disqusShortname;
+var disqus_title = embedVars.disqusTitle;
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    var dsqConfig = embedVars.disqusConfig;
+    this.page.integration = dsqConfig.integration;
+    this.page.remote_auth_s3 = dsqConfig.remote_auth_s3;
+    this.page.api_key = dsqConfig.api_key;
+    this.sso = dsqConfig.sso;
+    this.language = dsqConfig.language;
+
+    if (disqus_config_custom)
+        disqus_config_custom.call(this);
+};
+
+(function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<aside id="secondary" class="widget-area">
+
+		
+	<div id="custom_html-3" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- PyScripts-Left-Tower -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-6166316474194592"
+     data-ad-slot="6727118781"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div id="custom_html-4" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div style="text-align: center;"><strong style="color: red; font-size: 20px;">Поддержи проект</strong></div>
+<div style="text-align: center;">Стань нашим спонсором начиная с <strong>1$</strong>
+<a href="https://www.patreon.com/python_community" target="_blank" rel="nofollow noopener">patreon.com/python_community</a></div>
+<img class="size-full wp-image-33854 aligncenter" src="https://python-scripts.com/wp-content/uploads/2020/08/snakemoney.png" alt="Поддержка проекта" width="139" height="200" /></div></div>	
+		
+</aside><!-- #secondary -->
+
+	</div><!-- #content -->
+	
+	
+</div><!-- #page -->
+
+
+
+<footer id="colophon" class="site-footer">
+    <div class="site clearfix">
+        <button type="button" class="scrolltop js-scrolltop"></button>
+
+        <div class="site-info">
+            Изучаем Python 3 на примерах
+            <div class="footer-navigation">
+                <div class="menu-top-container"><ul id="socindary-menu" class="menu"><li id="menu-item-34880" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34880"><a href="https://python-scripts.com/category/decorators">Декораторы</a></li>
+<li id="menu-item-1846" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1846"><a href="https://python-scripts.com/category/gui/tkinter-python">Уроки Tkinter</a></li>
+<li id="menu-item-1847" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1847"><a href="https://python-scripts.com/category/gui/pycairo-tutorials-python">Уроки PyCairo</a></li>
+<li id="menu-item-29350" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-29350"><a href="https://python-scripts.com/install-python-3-8-linux">Установка Python 3 на Linux</a></li>
+</ul></div>            </div>
+        </div>
+
+        <div class="site-counters">
+            <noindex>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(43460914, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/43460914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+	
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65605638-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-65605638-3');
+</script>
+
+</noindex>        </div>
+    </div>
+    </footer><!-- #colophon -->
+
+
+
+
+<script type="text/javascript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script>    <script type="text/javascript">function GoTo(link){window.open(link.replace("_","http://"));}</script>
+    <link rel='stylesheet' id='js_composer_front-css'  href='https://python-scripts.com/wp-content/plugins/js_composer/assets/css/js_composer.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://python-scripts.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"python-scripts-1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/disqus-comment-system/public/js/comment_count.js' id='disqus_count-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/themes/yelly/js/sticky.js' id='revelation-sticky-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/themes/yelly/js/scripts.js' id='revelation-scripts-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/comment-reply.min.js' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/mystickysidebar/js/detectmobilebrowser.js' id='detectmobilebrowser-js'></script>
+<script type='text/javascript' id='mystickysidebar-js-extra'>
+/* <![CDATA[ */
+var mystickyside_name = {"mystickyside_string":"#secondary","mystickyside_content_string":"","mystickyside_margin_top_string":"50","mystickyside_margin_bot_string":"0","mystickyside_update_sidebar_height_string":"true","mystickyside_min_width_string":"0","device_desktop":"1","device_mobile":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/mystickysidebar/js/theia-sticky-sidebar.js' id='mystickysidebar-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/ui/core.min.js' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/ui/widget.min.js' id='jquery-ui-widget-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/ui/mouse.min.js' id='jquery-ui-mouse-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/ui/draggable.min.js' id='jquery-ui-draggable-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/ui/slider.min.js' id='jquery-ui-slider-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-includes/js/jquery/jquery.ui.touch-punch.js' id='jquery-touch-punch-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-admin/js/iris.min.js' id='iris-js'></script>
+<script type='text/javascript' id='wp-color-picker-js-extra'>
+/* <![CDATA[ */
+var wpColorPickerL10n = {"clear":"\u0421\u0431\u0440\u043e\u0441","defaultString":"\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e","pick":"Select Color"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://python-scripts.com/wp-admin/js/color-picker.min.js' id='wp-color-picker-js'></script>
+<script type='text/javascript' src='https://python-scripts.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js' id='wpb_composer_front_js-js'></script>
+
+
+
+
+
+
+</body>
+</html>

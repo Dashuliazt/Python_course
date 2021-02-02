@@ -1,34 +1,67 @@
-a = tuple((1,2,3))
-s = (3,4,5)
-ol_tup = tuple(set(list(s)).intersection(list(a)))
-c = tuple(set(a).union(s))
-h = tuple(set(a).difference(s))
-k = list(c)
-k.reverse()
-l = tuple(k)
-j = list(l)
+# age = int(input('Введите ваш возраст'))
+# if age > 18:
+#     print('Доступ разрешен')
+# else:
+#     print(f'Просьба подождать {18 - age} лет')
+#
+# #task2
+# a = int(input('Введите число 0-10'))
+# g = int(input('Введите число 0-10'))
+# e = int(input('Введите число 0-10'))
+#
+# if a>g and a>e:
+#     print(f'Наибольшее число {a}')
+# elif g>a and g>e:
+#     print(f'Наибольшее число {g}')
+# elif e>a and e>g:
+#     print(f'Наибольшее число {e}')
+#
+# #task3
+# a = int(input('Введите число 5-15'))
+# h = tuple(range(a))
+#
+# print(*h, sep='\n----\n', end='\nSuccess!')
+#
+# #task4
+#
+# a = int(input('\nВведите любое целое число'))
+# if a%2 == 0:
+#     print('Even number')
+# else:
+#     print('Odd number')
+#
+# #task5
+# a = int(input('\nВведите год'))
+# if a%4 ==0:
+#     print('Высокосный год')
+# else:
+#     print('Не высокосный год')
 
-#task 2
-first_name = input('Введети имя')
-last_name = input('Введети фамилию')
-size = input('Укажите ваш размер обуви')
-file = open('new_file.txt', 'w')
-file.write(first_name +' '+ last_name + ' - ' + size)
-file.close()
-file = open('new_file.txt', 'r+')
-a = file.read()
-a.split(' ')
-a[3] = 44
+#task6
 
+# f = open('whitelist.txt', 'r+')
+# h = open('blacklist.txt', 'r+')
+# a = input('\nВведите ваше имя')
+# f = f.read()
+# h = h.read()
+# if a in f:
+#     print('Приветствуем Вас ' + a)
+# if a in h:
+#     print('Ваше имя ' + a + ' находится в блоке')
+# else:
+#     j = open('whitelist.txt', 'a+')
+#     j.write('\n' + a)
+#     j.read()
+#     j.close()
 
-
-#task3
-file = open('new_file.txt', 'w')
-str = first_name + '' + last_name + ' -' + size
-str.replace()
-file.write(str)
-file.close()
-
-#task4
-
+#task7
+f = open('whitelist.txt', 'r+')
+h = open('blacklist.txt', 'r+')
+f = f.read()
+h = h.read()
+f = f.split('\n')
+h = h.split('\n')
+d = open('all.txt', 'w+')
+h.extend(f)
+print(*h, sep='\nXXXXXXXXXXXXXXXX\n', end='\nPrint Finished ', file=d)
 

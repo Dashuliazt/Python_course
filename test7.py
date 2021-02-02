@@ -1,67 +1,84 @@
-# age = int(input('Введите ваш возраст'))
-# if age > 18:
-#     print('Доступ разрешен')
-# else:
-#     print(f'Просьба подождать {18 - age} лет')
+# #task 1
+# for soten in range(101):
+#     print(soten)
 #
-# #task2
-# a = int(input('Введите число 0-10'))
-# g = int(input('Введите число 0-10'))
-# e = int(input('Введите число 0-10'))
+# #task 2
+# n = 0
+# for soten in range(101):
+#     n+=soten
+# print(n)
+# #while
+# soten = 0
+# while soten < 101:
+#     l += soten
+#     soten +=1
+# print(l)
 #
-# if a>g and a>e:
-#     print(f'Наибольшее число {a}')
-# elif g>a and g>e:
-#     print(f'Наибольшее число {g}')
-# elif e>a and e>g:
-#     print(f'Наибольшее число {e}')
+# #task 3
+# n = int(input('Введите число от 1 до 10'))
+# t = int(input('Введите число от 100 до 1000'))
+# list_all = []
+# for p in range(n, t):
+#     if p % 2 == 0:
+#         list_all.append(p)
+# print(list_all)
 #
-# #task3
-# a = int(input('Введите число 5-15'))
-# h = tuple(range(a))
+# list_all1 = [p for p in range(n, t) if p % 2 == 0]
+# print(list_all1)
 #
-# print(*h, sep='\n----\n', end='\nSuccess!')
+# #task 4
 #
-# #task4
+# for h in range(11):
+#     j = '0'
+#     print(str(h) + '-' + j*10)
 #
-# a = int(input('\nВведите любое целое число'))
-# if a%2 == 0:
-#     print('Even number')
-# else:
-#     print('Odd number')
 #
-# #task5
-# a = int(input('\nВведите год'))
-# if a%4 ==0:
-#     print('Высокосный год')
-# else:
-#     print('Не высокосный год')
+# #task 5
 
-#task6
+n = int(input('Введите любое число'))
+t = int(input('Введите любое число'))
+k = int(input('Введите любое число'))
+list_all = [n, t, k]
+for same in range(len(list_all)):
+    if list_all[same] == list_all[same]:
+        print('SUPER')
+    print('Not the same')
+#
+# #task 6
+#
+# n = int(input('Введите любое число'))
+# j=1
+# for fact in range(1,n+1):
+#     j = j*fact
+# print(j)
 
-# f = open('whitelist.txt', 'r+')
-# h = open('blacklist.txt', 'r+')
-# a = input('\nВведите ваше имя')
-# f = f.read()
-# h = h.read()
-# if a in f:
-#     print('Приветствуем Вас ' + a)
-# if a in h:
-#     print('Ваше имя ' + a + ' находится в блоке')
-# else:
-#     j = open('whitelist.txt', 'a+')
-#     j.write('\n' + a)
-#     j.read()
-#     j.close()
+# #task 7
+# n = int(input('Введите любое число'))
+# D = {x:pow(x,2) for x in range(2,n+1)}
+# print(D)
 
-#task7
-f = open('whitelist.txt', 'r+')
-h = open('blacklist.txt', 'r+')
-f = f.read()
-h = h.read()
-f = f.split('\n')
-h = h.split('\n')
-d = open('all.txt', 'w+')
-h.extend(f)
-print(*h, sep='\nXXXXXXXXXXXXXXXX\n', end='\nPrint Finished ', file=d)
+#task 8
 
+import string
+
+h = string.ascii_lowercase
+dict_abc={}
+p = 0
+for j in h:
+    dict_abc[h.index(j)+1]=j
+dict_abc1 = {h.index(j)+1: j for j in h}
+dict_cba = {value: key for key, value in dict_abc1.items()}
+
+#task 9
+import random
+cities = ['Kiev', 'Odessa', 'Lviv', 'Chernihiv', 'Kharkiv']
+temper = []
+dict_city={}
+for temp in random.sample(range(100, 1000), 7):
+    temper.append(temp)
+for j in range(len(cities)):
+    dict_city[cities[j]] = temper
+print(dict_city)
+
+temper = [temp for temp in random.sample(range(100, 1000), 7)]
+dict_city1 = {cities[j]: temper for j in range(len(cities))}

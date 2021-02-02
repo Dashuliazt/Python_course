@@ -1,51 +1,124 @@
-# a =[]
-# def my_sum(s,c,k):
-#     for i in range(c):
-#         a.append(k)
-#     for j in range(s):
-#         print (a)
-# my_sum(3,5,1)
-
-# task 2
-# a =[]
-# def my_sum(s,c,k=0):
-#     for i in range(c):
-#         a.append(k)
-#     for j in range(s):
-#         print (a)
-# my_sum(3,5)
-
-# # task 3
+# my_list = [1, 2, 4]
+# iterator
+# my_iter = iter(my_list)
+# while True:
+#     try:
+#         print(next(my_iter))
+#     except StopIteration:
+#         break
 #
-# upper = lambda x: x.upper()
-# print(upper('dddd'))
+#генератор №1 создание функциями
+# def my_gen():
+#     for i in range(10):
+#         yield i
+# обьект генератора
+# m = my_gen()
+# print(next(m))
+# print(next(m))
+# print(next(m))
+#генератор №2
+# my_gen1 = (x for x in range(10))
+# print(my_gen1)
+# for i in my_gen1:
+#     print(i)
+
+# import sys
+# my_list = [x for x in range(100000000)]
+# my_gen = (x for x in range(1000000000))
+# print(sys.getsizeof(my_list))
+# print(sys.getsizeof(my_gen))
+
+# def count(start = 0):
+#     while True:
+#         yield start
+#         start +=1
 #
-# # task 4
-# import string
-# k =[]
-# for i in string.ascii_lowercase:
-#     k.append(i)
-# print(list(map(upper, k)))
+# c = count()
+# print(next(c))
+# print(next(c))
+# print(next(c))
+# print(next(c))
+# print(next(c))
 
-# task 5
-
-# import string
-# import random
-# def low_up():
-#     k = random.sample(string.ascii_letters, 10)
-#     print(k)
-#     for i in range(len(k)):
-#          if str(k[i]).isupper():
-#             k[i] = str(k[i]).replace(k[i],str(k[i]).lower())
-#     print(k)
+# my = (x for x in range(2))
 #
-# low_up()
-# task 5 - 2
-# import string
-# import random
-# print(list(map(lambda x: str(x).replace(x, str(x).lower()),
-#                 random.sample(string.ascii_letters, 10))))
-# task 6
+# for i in my:
+#     print(i)
+#
+# my1 = (x for x in range(2))
+#
+# for j in my1:
+#     print(j)
 
 
-print(list((map(lambda x : x if x%3 == 0 else 0, [i for i in range(-20,20)]))))
+
+# def foo():
+#     print('hello')
+# def foo1():
+#     pass
+# def foo2():
+#     pass
+#
+# list_func = [foo, foo1, foo2]
+# my_list = [1, 2]
+# for func in my_list:
+#     func(my_list)
+
+# def foo():
+#     def wraper():
+#         print('hi')
+#     return wraper
+# foo()()
+
+# декораторы
+# def foo(func):
+#     def wrapper():
+#         print('before call func')
+#         func()
+#         print('after call func')
+#     return wrapper
+#
+# # имя декоратора вызываем @foo
+# @foo
+# def hello():
+#     print('Im code func hello')
+#
+# hello()
+#
+# def my_dec(func):
+#     def wrapper(s):
+#         return [x**2 for x in func(s)]
+#     return wrapper
+#
+# def dec_minus(func):
+#     def wrap(s):
+#         return [x-1 for x in func(s)]
+#     return wrap
+#
+#
+# @dec_minus
+# @my_dec
+# def res_list(num):
+#     return [x for x in range(num)]
+#
+# print(res_list(10))
+
+def dec_myP(d):
+    def dec_my(func):
+        def wrap(s):
+            return [x for x in func(s) if x%d ==0]
+        return wrap
+    return dec_my
+
+def dec_mest(func):
+    def wraps(s):
+        return [str(x)*x for x in func(s)]
+    return wraps
+
+
+@dec_mest
+@dec_myP(2)
+def my_gen(num):
+    return (x for x in range(num))
+print(my_gen(10))
+

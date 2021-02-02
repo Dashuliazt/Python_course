@@ -1,18 +1,33 @@
-login_in = input('Are you registered? (Type enter \'YES\' or \'NO\')').upper()
-if login_in == 'YES':
-    with open('users.txt', 'w+') as file:
-        users = file.read().split()
-        login_user = input('Your login:')
-        pass_user = input('Your password:')
-        if login_user in users:
-            print('Your welcome!')
-        else:
-            register_in = input(
-                'Are you registrated now? (Type enter \'YES\' or \'NO\')').upper()
-            if register_in == 'YES':
-                login_user = input('Please enter you login:')
-                pass_user = input('Please enter you password:')
-                registr_f = open('users.txt', 'w+')
-                registr_f.write(login_user + '-' + pass_user)
-else:
-    print('Have a nice day')
+# import random
+#
+# # task 1
+#
+# bubbles = [i for i in random.sample(range(0,100), 10)]
+# print(bubbles)
+# for bubble in range(len(bubbles)-1):
+#     for j in range(len(bubbles)-bubble-1):
+#         print('before:', bubbles)
+#         if bubbles[j] > bubbles[j+1]:
+#             bubbles[j], bubbles[j+1] = bubbles[j+1], bubbles[j]
+#         print('after', bubbles)
+#     print(bubbles)
+
+# task 2
+
+for i in range(10):
+    try:
+        num = int(input('Введите Ваше любимое число: '))
+        print('Спасибо Вам за сотрудничество')
+        break
+    except ValueError:
+        i = i + 1
+        if i < 3:
+            print('Просьба быть внимательнее и ввести число')
+        elif i < 5:
+            print('Вы ввели не число')
+        elif i < 6:
+            print('У Вас осталась последняя попытка для ввода числа')
+        elif i > 5:
+            print('Вы исчерпали все попытки')
+            break
+    continue

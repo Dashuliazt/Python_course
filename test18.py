@@ -1,164 +1,252 @@
-# class Dog:
-#     legs = 4
-#     def __init__(self, name, age):
+# class Human:
+#     def __init__(self, name, lastname):
 #         self.name = name
-#         self.age = age
-# # одно нижнее подчёркивание _ - приватный но можно изменить
-# # 2 подчеркивания __ - приватный защищённый параметр чтоби его ізменіть можно напісать rename
-# # __str __ - короткую справку получим
-#     def __str__(self):
-#         return f'{self.name} is {self.age} years old.'
+#         self.lastname = lastname
+#         self.__age = None
 #
-#     def bark(self):
-#         print('Gav')
+#     @property
+#     def age(self):
+#         return self.__age
 #
-#
-# class York(Dog):
-#     def __init__(self, name, age, color):
-#         super().__init__(name, age)
-#         self.color = color
-#
-#     def bark(self):
-#         print('Woof')
-#
-# class JachRassel(Dog):
-#     def bark(self):
-#         print('jasd')
-#
-#
-#
-# rex = Dog('Rex',5)
-# alma = York('Alma', 2)
-# maylo = JackRassel('Maylo, 12')
-# rex.bark()
-# alma.bark()
-# maylo.bark()
-#
-#
-# # переименновать защищённый параметр
-#
-# class Dog:
-#     legs = 4
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-# # одно нижнее подчёркивание _ - приватный но можно изменить
-# # 2 подчеркивания __ - приватный защищённый параметр чтоби его ізменіть можно напісать rename
-# # __str __ - короткую справку получим
-#     def __str__(self):
-#         return f'{self.name} is {self.age} years old.'
-#
-#     def sound(self):
-#         print('Gav')
-#
-# class Cat:
-#     def sound(self):
-#         print('Meow')
-#
-# class Cow:
-#     def sound(self):
-#         print('Moo')
-
-# rex = Dog('name', 8)
-# tom = Cat()
-# burenka = Cow()
-
-# # параметрический полимарфизм
-# class SomeClass:
-#     def sum(self, a, c):
-#         return a+c
-#
-#
-# # параметрический полимарфизм
-# cl = SomeClass()
-# print(cl.sum(1,9))
-# print(cl.sum('1','9'))
-
-
-# проверка трушности
-# print(isinstance('20', int))
-
-# animals = [rex, tom, burenka]
-# # полимарфизм
-# for animal in animals:
-#     animal.sound()
-    # вариант без полиморизма больше кода имеет:
-    # if isinstance(animal, Dog):
-    #     animal.bark()
-    # elif isinstance(animal, Cat):
-    #     animal.meow()
-    # elif isinstance(animal, Cow):
-    #     animal.moo()
-
-
-#
-# class Date:
-#     def __init__(self, year, month, day):
-#         self.year = year
-#         self.month = month
-#         self.day = day
-#
-#
-#     @staticmethod
-#     def validate(date_string):
-#         year, month, day = list(map(int, date_string.split('-')))
-#         res = 1 <= year <= 2020 and 1 <= month <= 12 and 1 <= day <= 30
-#         return res, year, month, day
-#
-#     @classmethod
-#     def create_obj(cls, date_string):
-#         data = cls.validate(date_string)
-#         if data[0]:
-#             return cls(data[1], data[2], data[3])
+#     @age.setter
+#     def age(self, value):
+#         if isinstance(value, int) and value>0:
+#             self.__age = value
 #         else:
-#             return None
+#             raise ValueError('Age must be > 0.')
+#     @age.deleter
+#     def age(self):
+#         del self.__age
+#
+#     @property
+#     def fullname(self):
+#         return f'{self.name} {self.lastname}'
 #
 #
-# date_str = '2020-10-15'
-# # проверка статического метода
-# # print(Date.validate(date_str))
-# date = Date.create_obj(date_str)
-# print(date.year)
+#
+# me = Human('Alexandr', 'Slipchenko')
+# print(me.age)
+# me.age = 25
+# print(me.age)
+# print(me.fullname)
+#
 
-import string
 
-class Alphabet:
-    def __init__(self, lang, letters):
-        self.lang = lang
-        self.letters = list(letters)
-    def print(self):
-        return self.letters
-    def letters_num(self, letters):
-        return len(self.letters)
+# MIXIN methods
+# class Radio:
+#
+#     def set_fm(self, value):
+#         print(f'Set FM {value}.')
+#
+#     def play_song(self):
+#         print('Play song!')
+#
+#     def play_rec(self):
+#         print('Start rec')
+#
+#     def stop_rec(self):
+#         print('Stop rec')
+#
+# # __приватные для того чтобы были доступны только эти методы
+# из радио в этом данном классе
 
-class EngAlphabet(Alphabet):
+# class MixinRadio:
+#     def __init__(self):
+#         self.__radio = Radio()
+#
+#     def set_fm_and_play_song(self, value):
+#         self.__radio.set_fm(value)
+#         self.__radio.play_song()
+#
+#
+#
+#
+# class Car(MixinRadio):
+#
+#     def __init__(self, color, brand):
+#         super().__init__()
+#         self.color = color
+#         self.brand = brand
+#
+#     def start(self):
+#         print('Start')
+#
+#     def stop(self):
+#         print('Stop')
+#
+#     def ride(self):
+#         print('Ride')
+#
+# audi = Car('black', 'Audi')
+#
+# audi.set_fm_and_play_song(108.1)
 
-    __letters_num = 26
+# Абстрактные методы нужны для того чтобы
+# дочерние классы обязательно использовали методы в абстракте
 
-    def __init__(self):
-        super().__init__('En', string.ascii_uppercase)
+# from abc import ABC
+# from abc import abstractmethod
+# class Human(ABC):
+#     @abstractmethod
+#     def speak(self):
+#         print('Hello')
+#
+# class Jack(Human):
+#     def speak(self):
+#         print('Hi')
+#
+# jack = Jack()
+# jack.speak()
 
-    def is_en_letter(self, letter):
-        if letter.upper() in self.letters:
-            return True
-        return False
-        # print(isinstance(letter, Alphabet.print(self.lang)))
+# from abc import ABC
+# from abc import abstractmethod
+#
+# class PlayerFactory(ABC):
+#
+#     @abstractmethod
+#     def create_player(self, name):
+#         pass
+#
+#     def create_weapon(self):
+#         pass
+#
+# class PoliceFactory(PlayerFactory):
+#
+#     def create_player(self, name):
+#         return Policeman(name)
+#     def create_weapon(self):
+#         return Colt()
+#
+# class TerroristFactory(PlayerFactory):
+#
+#     def create_player(self, name):
+#         return Terrorist(name)
+#     def create_weapon(self):
+#         return Glock()
+#
+# class Policeman:
+#
+#     def __init__(self, name):
+#         self.name = name
+#         self.weapon = None
+#
+#     def add_weapon(self, weapon):
+#         self.weapon = weapon
+#
+#     def shoot(self):
+#         print(f'Policeman {self.name} shoot from {self.weapon.pistol()}')
+#
+#     def kill(self, name_terrorist):
+#         print(f'Policemen {self.name} killed {name_terrorist}')
+#
+# class Terrorist(Policeman):
+#
+#     def __init__(self, name):
+#         super().__init__(name)
+#
+#     def shoot(self):
+#         print(f'Terrorist {self.name} shoot from {self.weapon.pistol()}')
+#
+#     def kill(self, name_policeman):
+#         print(f'Terrorist {self.name} killed {name_policeman}')
+#
+# class Colt:
+#
+#     def pistol(self):
+#         return 'Colt'
+#
+# class Glock:
+#
+#     def pistol(self):
+#         return 'Glock'
+#
+#
+# class Creator:
+#     @staticmethod
+#     def create_skin(factory, name):
+#         player = factory.create_player(name)
+#         weapon = factory.create_weapon()
+#         player.add_weapon(weapon)
+#         return player
+#
+# if __name__ == '__main__':
+#     terrorist = Creator.create_skin(TerroristFactory(), 'Putin')
+#     terrorist.shoot()
+#     policemen = Creator.create_skin(PoliceFactory(), 'Ivanov')
+#     policemen.shoot()
+#     policemen.kill(terrorist.name)
+#     terrorist.kill(policemen.name)
 
-    def letters_num(self):
-        return EngAlphabet.__letters_num
-        # return self.letters_num()
+from abc import ABC
+from abc import abstractmethod
+
+class PlayerFactory(ABC):
+
+    @abstractmethod
+    def create_player(self, name):
+        pass
+
+    def create_skill(self):
+        pass
+
+
+class OrcFactory(PlayerFactory):
+
+    def create_player(self, name):
+        return Orc(name)
+    def create_skill(self):
+        return Ax()
+
+class WizFactory(PlayerFactory):
+
+
+    def create_player(self, name):
+        return Wiz(name)
+    def create_skill(self):
+        return Magic_wand()
+
+class Orc:
+
+    def __init__(self, name):
+        self.name = name
+        self.skill = None
+
+    def add_skill(self, skill):
+        self.skill = skill
+
+    def damage(self, value):
+        print(f'Orc {self.name} received {value} damage with in {self.skill.tool()}')
+
+
+class Wiz(Orc):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def heal(self, value):
+        print(f'Wiz {self.name} healed with "{self.skill.tool()}" - {value} percent')
+
+
+class Ax:
+
+    def tool(self):
+        return 'Ax'
+
+class Magic_wand:
+
+    def tool(self):
+        return 'Magic wand'
+
+class Creator:
 
     @staticmethod
-    def example():
-        print('Hi team!')
-
+    def create_person(factory, name):
+        player = factory.create_player(name)
+        skill = factory.create_skill()
+        player.add_skill(skill)
+        return player
 
 if __name__ == '__main__':
-    eng_alphabet = EngAlphabet()
-    eng_alphabet.print()
-    print(eng_alphabet.letters_num())
-    print(eng_alphabet.is_en_letter('F'))
-    print(eng_alphabet.is_en_letter('Щ'))
-    EngAlphabet.example()
-
-
+    wiz = Creator.create_person(WizFactory(), 'MAG')
+    wiz.heal(30)
+    orc = Creator.create_person(OrcFactory(), 'Greg')
+    orc.damage(70)

@@ -1,25 +1,28 @@
-class Human:
-    default_name = 'Dariia'
-    default_age = 25
+from faker import Faker
+import csv
+import random
 
-    def __init__(self, default_name, default_age, money, house):
-        self.age = default_age
-        self.name = default_name
-        self.__money = money
-        self.__house = house
+faker = Faker()
+with open('users.csv', 'w') as file:
+    headers = ['id', 'username', 'name', 'sex', 'address', 'birthdate', 'salary']
+    writer = csv.DictWriter(file, fieldnames=headers, lineterminator='\n')
+    for i in range(1, 1001):
+        data = {
+            'id': i,
+            'username': faker.user_name(),
+            'name': faker.name(),
+            'sex': faker.simple_profile()['sex'],
+            'address': faker.address().replace('\n', ' '),
+            'mail': faker.ascii_email(),
+            'birthdate': faker.date(),
+            'salary': random.randint(6000, 50000)
+        }
+        writer.writerow(data)
 
-    def info(self):
-        print(f'Имя - {self.name} \nВозраст {self.age} \nДом - {self.__house} \nДеньги - {self.__money}')
 
-    @staticmethod
-    def default_info(default_name, default_age):
-        print(f'Имя {default_name} Возраст {default_age}')
+# faker = Faker()
+# print(faker.simple_profile())
 
 
 
 
-
-
-
-hun = Human('Dariia', 12, '1000','Пентхаус')
-hun.default_info()

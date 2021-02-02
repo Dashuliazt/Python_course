@@ -1,68 +1,315 @@
-import string
-import random
-import re
-# таска 1
-x = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-x.reverse()
-print(x)
-x.insert(0, 21)
-x.append(9)
-x.remove(20)
-del x[2]
-x.sort()
-k = sum(x)
-print(k)
-# таска 2
-number = int(input('Введите число от 10 до 30'))
-letter_abc = list(string.ascii_letters[0:9])
-letter_def = list(string.ascii_letters[10::])
-digits_012 = list(string.digits)
-letter_abc.extend(letter_def)
-letter_abc.extend(digits_012)
-all_list = '' .join(random.sample(letter_abc, number))
-print(all_list)
+from multiprocessing import Pool
+#подключения библиотек
+import http.client
+import requests
+import mysql.connector
+import ssl
+import datetime
 
-# таска 3
-dtb = input('Введите Вашу дату рождения в формате дд.мм.ГГГГ:')
-r = input('Введите ваш рост:')
-m = input('введите ваш вес:')
-dtb1 = input('Введите дату рождения вашего родственника формате дд-мм-ГГГГ:')
-fdf = dtb.split('.', 2)
-fdf1 = dtb1.split('-', 2)
-list_all = [r, m, fdf]
-fdf.extend(fdf1)
-list_all = [r, m, fdf]
-dtb_all = list_all.pop(2)
-list_all, dtb_all = dtb_all, list_all
-print(list_all, dtb_all)
 
-# таска 4
 
-rr = int(input('Введите двухзначное число:'))
-rrrr = int(input('Введите четырёхзначное число:'))
-list_rr = random.sample(range(rr, rrrr), 10)
-list_rr_max = list_rr.index(max(list_rr))
-list_rr_min = list_rr.index(min(list_rr))
-list_rr[list_rr_max],list_rr[list_rr_min] = list_rr[list_rr_min], \
-                                            list_rr[list_rr_max]
-print(list_rr)
+def f(con_cod):
+    now = datetime.datetime.now()
+    # цикл перебиарет номера
+    i = 0
+    r = requests.get(
+        'https://hidemy.name/api/proxylist.txt?out=plain&country=ALARAMATBDBYBOBABRBGBIKHCACLCOCDCZECFIFRGEDEHNHKHUINIDIRIQITJPKEKRLVMKMWMYMXMDMZNPNLNINENGPKPSPYPEPLRORSSGSKZAESSECHTWTHTRUAAEGBVEVN&maxtime=1000&type=hs&'
+        'maxtime=1000&code=662967421859502')
+    # r = requests.get('https://hidemy.name/api/proxylist.txt?out=plain&country=UAGEFR&type=hs&maxtime=2000&'
+    #                  'code=662967421859502')
+    spisok = r.text.split('\r\n')[i]
+    k = len(r.text.split('\r\n'))
+    print('Start' + spisok)
+    host = spisok.split(':', )[:1]
+    host = host[0]
+    port = spisok.split(':', )[1:]
+    port = port[0]
+    # подключение к базе 1026065
+    cnx = mysql.connector.connect(user='pma', password='pma', host='127.0.0.1',
+                                  database='python_test1',
+                                  connection_timeout=7200)
+    result = []
+    num = 5604675
+    num_max = num + 5
+    while num != num_max:
+        # формирования номера в виде строки для запроса
+        phone = '0' + str(con_cod) + str(num)
+        print(phone)
+        # запрос на список прокси по странам Германия, Россия Украина
+        try:
+            # формирования запроса
+            payload = 'number=' + phone
+            headers = {
+                'X-OCTOBER-REQUEST-HANDLER': 'onMobileTransferSearch',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Host': 'www.ucrf.gov.ua',
+                'Content-Length': '17',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cookie': 'cookiesession1=2AE42CE6IETPSROE2OBUG19KIOIC9DC5'
+            }
+            conn = http.client.HTTPSConnection(host, port, timeout=5,
+                                               context=ssl._create_unverified_context())
+            conn.set_tunnel("www.ucrf.gov.ua")
+            conn.request("POST", "/ua/services/transfer-mobile-search",
+                         payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            # print(data)
 
-# таска 5
+        except OSError:
+            if i < k - 2:
+                i = i + 1
+                spisok = r.text.split('\r\n')[i]
+                print('Error OS' + spisok)
+                host = spisok.split(':', )[:1]
+                host = host[0]
+                port = spisok.split(':', )[1:]
+                port = port[0]
+                continue
+            else:
+                i = 0
+                spisok = r.text.split('\r\n')[i]
+                print('начали сначала' + spisok)
+                host = spisok.split(':', )[:1]
+                host = host[0]
+                port = spisok.split(':', )[1:]
+                port = port[0]
+                continue
 
-list_first = random.sample(range(10, 100), 10)
-list_sec = random.sample(range(10, 100), 10)
-list_third = random.sample(range(10, 100), 10)
-list_all = [list_first, list_sec, list_third]
-list_all[2][7], list_all[2][8], list_all[2][9] = list_all[0][0], list_all[0][1], \
-                                               list_all[0][2]
-list_all[0][7], list_all[0][8], list_all[0][9] = list_all[2][0], list_all[2][1],\
-                                                 list_all[2][2]
-print(list_all)
-list_all[1][:5] = list_all[0][:5]
-list_all[0][5:] = list_all[1][5:]
-print(list_all)
+        except:
+            if i < k - 2:
+                i = i + 1
+                spisok = r.text.split('\r\n')[i]
+                print('общай ошибка' + spisok)
+                host = spisok.split(':', )[:1]
+                host = host[0]
+                port = spisok.split(':', )[1:]
+                port = port[0]
+                continue
+            else:
+                i = 0
+                spisok = r.text.split('\r\n')[i]
+                print('начали сначала общая ошибка' + spisok)
+                host = spisok.split(':', )[:1]
+                host = host[0]
+                port = spisok.split(':', )[1:]
+                port = port[0]
+                continue
 
-list_one_all.extend(list_first)
-list_one_all.extend(list_sec)
-list_one_all.extend(list_third)
-print(list_one_all)
+                # проверка по классу ответа
+
+        if 'alert-success' in data.decode('UTF-8'):
+            # номер найден
+            answer = data.decode('UTF-8').replace('<\\', '<').encode().decode(
+                'unicode-escape')
+            answer = answer.split('<span>')
+            answer = answer[1]
+            answer = answer.split('</span>')
+            # answer - полный ответ (description)
+            answer = answer[0]
+            phone = answer.split(' ')
+            # - только
+            answer = answer[61:-1]
+            print(answer)
+            print(type(answer))
+            my_dict = {'КИЇВСТАР': '25503', 'Lifecell': '25506',
+                       'Vodafone Україна': '25501'}
+            if answer in my_dict:
+                answer = my_dict[answer]
+            # - только номер телефона
+            phone = phone[2]
+            status = 'present'
+            result.append(answer)
+            print('перенесённый' + phone)
+
+        else:
+            # номер отсутствует
+            answer = data.decode('UTF-8').replace('<\\', '<').encode().decode(
+                'unicode-escape')
+            answer = answer.split('<span>')
+            answer = answer[1]
+            answer = answer.split('</span>')
+            # answer - полный ответ (description)
+            answer = answer[0]
+            phone = answer.split(' ')
+            # - только номер телефона
+            phone = phone[2]
+            status = 'absent'
+            result.append(answer)
+            print('не перенесённый ' + phone)
+        if status == 'present':
+            # формирования запроса в базу данных (вставка данных)
+            sql = """INSERT INTO numbers (number, mccmnc, date) VALUES (%s,%s,%s)"""
+            val = [phone, answer, now]
+            cursor = cnx.cursor()
+            cursor.execute(sql, val)
+            cnx.commit()
+            num = num + 1
+            cursor.close()
+            cnx.close()
+        else:
+            num = num + 1
+            print('_________________')
+
+if __name__ == '__main__':
+    p = Pool(15)
+    print(p.map(f, [66, 99, 95, 50, 68, 67, 96, 97, 98, 39, 94, 63, 73, 93, 91]))
+
+
+
+
+#     # подключения библиотек
+# import http.client
+# import requests
+# import mysql.connector
+# import ssl
+# import datetime
+#
+# now = datetime.datetime.now()
+# # цикл перебиарет номера
+# i = 0
+# r = requests.get(
+#     'https://hidemy.name/api/proxylist.txt?out=plain&country=ALARAMATBDBYBOBABRBGBIKHCACLCOCDCZECFIFRGEDEHNHKHUINIDIRIQITJPKEKRLVMKMWMYMXMDMZNPNLNINENGPKPSPYPEPLRORSSGSKZAESSECHTWTHTRUAAEGBVEVN&maxtime=1000&type=hs&'
+#     'maxtime=1000&code=662967421859502')
+# # r = requests.get('https://hidemy.name/api/proxylist.txt?out=plain&country=UAGEFR&type=hs&maxtime=2000&'
+# #                  'code=662967421859502')
+# spisok = r.text.split('\r\n')[i]
+# k = len(r.text.split('\r\n'))
+# print('Start' + spisok)
+# host = spisok.split(':', )[:1]
+# host = host[0]
+# port = spisok.split(':', )[1:]
+# port = port[0]
+# # подключение к базе 1026065
+# cnx = mysql.connector.connect(user='pma', password='pma', host='127.0.0.1',
+#                               database='python_test1', connection_timeout=7200)
+# result = []
+# country_code = '0'
+# num = int(input(
+#     'Введите код оператора без 0 и начало диапазона, пример: 660000066 : '))
+# num_max = num + 1000
+# while num != num_max:
+#     # формирования номера в виде строки для запроса
+#     phone = country_code + str(num)
+#     print(phone)
+#     # запрос на список прокси по странам Германия, Россия Украина
+#     try:
+#         # формирования запроса
+#         payload = 'number=' + phone
+#         headers = {
+#             'X-OCTOBER-REQUEST-HANDLER': 'onMobileTransferSearch',
+#             'X-Requested-With': 'XMLHttpRequest',
+#             'Host': 'www.ucrf.gov.ua',
+#             'Content-Length': '17',
+#             'Content-Type': 'application/x-www-form-urlencoded',
+#             'Cookie': 'cookiesession1=2AE42CE6IETPSROE2OBUG19KIOIC9DC5'
+#         }
+#         conn = http.client.HTTPSConnection(host, port, timeout=5,
+#                                            context=ssl._create_unverified_context())
+#         conn.set_tunnel("www.ucrf.gov.ua")
+#         conn.request("POST", "/ua/services/transfer-mobile-search", payload,
+#                      headers)
+#         res = conn.getresponse()
+#         data = res.read()
+#         print(data)
+#
+#     except OSError:
+#         if i < k - 2:
+#             i = i + 1
+#             spisok = r.text.split('\r\n')[i]
+#             print('Error OS' + spisok)
+#             host = spisok.split(':', )[:1]
+#             host = host[0]
+#             port = spisok.split(':', )[1:]
+#             port = port[0]
+#             continue
+#         else:
+#             i = 0
+#             spisok = r.text.split('\r\n')[i]
+#             print('начали сначала' + spisok)
+#             host = spisok.split(':', )[:1]
+#             host = host[0]
+#             port = spisok.split(':', )[1:]
+#             port = port[0]
+#             continue
+#
+#     except:
+#         if i < k - 2:
+#             i = i + 1
+#             spisok = r.text.split('\r\n')[i]
+#             print('общай ошибка' + spisok)
+#             host = spisok.split(':', )[:1]
+#             host = host[0]
+#             port = spisok.split(':', )[1:]
+#             port = port[0]
+#             continue
+#         else:
+#             i = 0
+#             spisok = r.text.split('\r\n')[i]
+#             print('начали сначала общая ошибка' + spisok)
+#             host = spisok.split(':', )[:1]
+#             host = host[0]
+#             port = spisok.split(':', )[1:]
+#             port = port[0]
+#             continue
+#
+#             # проверка по классу ответа
+#
+#     if 'alert-success' in data.decode('UTF-8'):
+#         # номер найден
+#         answer = data.decode('UTF-8').replace('<\\', '<').encode().decode(
+#             'unicode-escape')
+#         answer = answer.split('<span>')
+#         answer = answer[1]
+#         answer = answer.split('</span>')
+#         # answer - полный ответ (description)
+#         answer = answer[0]
+#         phone = answer.split(' ')
+#         # - только
+#         answer = answer[61:-1]
+#         print(answer)
+#         print(type(answer))
+#         my_dict = {'КИЇВСТАР': '25503', 'Lifecell': '25506',
+#                    'Vodafone Україна': '25501'}
+#         if answer in my_dict:
+#             answer = my_dict[answer]
+#         # - только номер телефона
+#         phone = phone[2]
+#         status = 'present'
+#         result.append(answer)
+#         print('перенесённый' + phone)
+#
+#     else:
+#         # номер отсутствует
+#         answer = data.decode('UTF-8').replace('<\\', '<').encode().decode(
+#             'unicode-escape')
+#         answer = answer.split('<span>')
+#         answer = answer[1]
+#         answer = answer.split('</span>')
+#         # answer - полный ответ (description)
+#         answer = answer[0]
+#         phone = answer.split(' ')
+#         # - только номер телефона
+#         phone = phone[2]
+#         status = 'absent'
+#         result.append(answer)
+#         print('не перенесённый ' + phone)
+#     if status == 'present':
+#         # формирования запроса в базу данных (вставка данных)
+#         sql = """INSERT INTO numbers (number, mccmnc, date) VALUES (%s,%s,%s)"""
+#         val = [phone, answer, now]
+#         cursor = cnx.cursor()
+#         cursor.execute(sql, val)
+#         cnx.commit()
+#         num = num + 1
+#         cursor.close()
+#         cnx.close()
+#     else:
+#         num = num + 1
+#
+# print(num)
+# # cursor.close()
+# # cnx.close()
+#
+
+

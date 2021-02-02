@@ -1,134 +1,202 @@
-
 import imaplib
 import email
 from datetime import datetime
 import html2text
 from os import path
 from email.header import decode_header, make_header
-def extract_body(payload):
-    if isinstance(payload,str):
-        return payload
-    else:
-        return '\n'.join([extract_body(part.get_payload()) for part in payload])
-def Readpost():
+import telebot
+from telebot import types
+
+
+
+
+
+
+def mail_post():
     mail = imaplib.IMAP4_SSL('imap.gmail.com')
-    mail.login('dasha@hicell.tel', 'DashaGerman19')
+    mail.login('support@hicell.tel', 'cldvuwspnpstodiw')
     mail.select()
-
-    while True:
-        try:
-            # Выводит список папок в почтовом ящике.
-            result, data = mail.search(None, 'ALL') # Выполняет поиск и возвращает UID писем.
-            if result != 'OK':
-                raise Exception("Error reading inbox: {}".format(data))
-            if data == ['0']:
-                return 'None'
-            labels = ['ik']
-            i=-5
-            while i < 0:
-                type, ready = mail.fetch(data[0].split()[i], '(FLAGS)')
-                if str(ready[0]).find('ik')>0:
-                    i +=1
-                    if i==0:
-                        return 'New messages is not found'
-                else:
-                    typ, msg_data = mail.fetch(data[0].split()[i], '(RFC822)')
-                    types, response = mail.store(data[0].split()[i],
-                                                 '+FLAGS',
-                                                 r'(%s)' % (labels[0]))
-                    message = email.message_from_bytes((data[0][i]))
-                    res = {
-                        'From': email.utils.parseaddr(message['From'])[1],
-                        'From name': email.utils.parseaddr(message['From'])[0],
-                        'Time': datetime.fromtimestamp(email.utils.mktime_tz(
-                            email.utils.parsedate_tz(message['Date']))),
-                        'To': message['To'],
-                        'Subject': str(
-                            make_header(decode_header(message["Subject"]))),
-                        'Text': '',
-                        'File': None
-                    }
+    return mail
 
 
-                    for response_part in msg_data:
-                        if isinstance(response_part, tuple):
-                            msg = email.message_from_bytes(response_part[1])
-                            payload=msg.get_payload()
-                            body=extract_body(payload)
+def Readpost():
+    mail_read_post = mail_post()
+    try:
+        # Выполняет поиск и возвращает UID писем.
+        result, data = mail_read_post.search(None, 'ALL')
+        if result != 'OK':
+            raise Exception("Error reading inbox: {}".format(data))
+        if data == ['0']:
+            return 'None'
+        uid_total = (str(data[0]).split('\''))[1].split(' ')
+        labels = ['bot']
+        i = -1
+        res1 = []
+        uid1 = []
+        while i > -len(uid_total):
+            type, ready = mail_read_post.fetch(data[0].split()[i], '(FLAGS)')
+            print(ready[0])
+            if str(ready[0]).find(labels[0])>0:
+                break
+            else:
+                typ, msg_data = mail_read_post.fetch(
+                    (data[0].split()[i]).decode('utf-8'), '(RFC822)')
+                uid = (str(msg_data[0]).split('\'')[1].split(' '))[0]
+                message = email.message_from_bytes((msg_data[0][1]))
+                res = {
+                    'From': email.utils.parseaddr(message['From'])[1],
+                    'From name': email.utils.parseaddr(message['From'])[0],
+                    'Time': datetime.fromtimestamp(email.utils.mktime_tz(
+                        email.utils.parsedate_tz(message['Date']))),
+                    'To': message['To'],
+                    'Subject': str(
+                        make_header(decode_header(message["Subject"]))),
+                    'Text': '',
+                    'File': None
+                }
+                types, response = mail_read_post.store(data[0].split()[i],
+                                             '+FLAGS',
+                                             r'(%s)' % (labels[0]))
+                res = f'{res["From name"]} \" {res["From"]} \" \n' \
+                  f'{res["Time"]} \n' \
+                  f'{res["Subject"]}'
+                res1.append(res)
+                uid1.append(uid)
+                i -= 1
 
-                    i += 1
-                    res1 = []
-                    res = f'{res["From name"]} \" {res["From"]} \" \n' \
-                          f'{res["Time"]} \n' \
-                          f'{res["Subject"]} \n' \
-                        # f'Text: {res["Text"]}'
-                    res1 = res1.append(res)
-                    return res1
+        if len(res1) == 0:
+            return 'New messages is not found'
+        else:
+            return res1, uid1
+    except ValueError:
+        return 'error'
 
-                        # print(typ, response)
-                        # print(mail.fetch(data[0].split()[i], '(FLAGS)'))
-        except ValueError:
-            return 'error'
 
-print(Readpost())
-# import telebot
+def get_text(uid):
+    mail_read_post = mail_post()
+    typ, msg_data = mail_read_post.fetch(uid, '(RFC822)')
+    message = email.message_from_bytes((msg_data[0][1]))
+    text1=[]
+    for part in message.walk():
+        if part.get_content_maintype() == 'multipart':
+            continue
+        if part.get_content_maintype() == 'text':
+            # reading as HTML (not plain text)
+            _html = part.get_payload(decode=True)
+            text = html2text.html2text(_html.decode())
+            text1.append(text)
+        # if part.get_content_maintype() == 'image':
+        #     _image=part.get_filename()
+        #     text1.append(_image)
+        return text1
+
+
+# Подключение бота
 # bot = telebot.TeleBot('1462574234:AAHBZLLLZ2V3BJKWroScV1vGOtmXs2dGg-A')
-# keyboard1 = telebot.types.ReplyKeyboardMarkup()
-# keyboard1.row('Check', 'Пока')
-#
-#
-# @bot.message_handler(content_types=['text'])
-# def send_text(message):
-#     if message.text.lower() == 'check':
-#         bot.send_message(message.chat.id, Readpost(), reply_markup=keyboard1)
-#     elif message.text.lower() == 'пока':
-#         bot.send_message(message.chat.id, 'Прощай, создатель')
-#
-#
-#
-# @bot.message_handler(commands=['start'])
-# def start_message(message):
-#     bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
-#
-# bot.polling()
+bot = telebot.TeleBot('1611646416:AAGSw1S9Catrw7zZsVOyEPsyyBOJjn3OtPA')
+keyboard1 = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+keyboard1.row('Check', 'Help')
+user_id = [391182955, 469481549, 249093185]
 
 
-# latest_email_uid = data[0].split()[-1]
-# for num in data[0].split():
-#     # result, data = mail.fetch(num, '(RFC822)')
-#     result, data = mail.uid('fetch', num, '(RFC822)')
-# if result != 'OK':
-#     raise Exception("Error reading email: {}".format(data))
-# if data == ['0']:
-#     print('None')
-# if delete ==True:
-#     mail.store(latest, '+FLAGS', '\\Deleted')
-# message = email.message_from_bytes((data[0][1]))
-# res = {
-#     'From': email.utils.parseaddr(message['From'])[1],
-#     'From name': email.utils.parseaddr(message['From'])[0],
-#     'Time': datetime.fromtimestamp(email.utils.mktime_tz(
-#         email.utils.parsedate_tz(message['Date']))),
-#     'To': message['To'],
-#     'Subject': str(make_header(decode_header(message["Subject"]))),
-#     'Text': '',
-#     'File': None
-# }
-# message_1 = email.message_from_bytes(data[0][1])
-# for part in message_1.walk():
-#     if part.get_content_maintype() == 'multipart':
-#         continue
-#     if part.get_content_maintype() == 'text':
-#         # reading as HTML (not plain text)
-#         _html = part.get_payload(decode=True)
-#         res['Text'] = html2text.html2text(_html.decode())
-# #     # elif part.get_content_maintype() == 'application' and part.get_filename():
-# #     #     fname = path.join("your/folder", part.get_filename())
-# #     #     attachment = open(fname, 'wb')
-# #     #     attachment.write(part.get_payload(decode = True))
-# #     #     attachment.close()
-# #     #     if res['File']:
-# #     #         res['File'].append(fname)
-# #     #     else:
-# #     #         res['File'] = [fname]
-# #
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+
+    user = message.from_user
+    if user.id in user_id:
+        bot.send_message(message.chat.id,
+                         f'Welcome, {user.first_name} to Support Bot!',
+                         reply_markup=keyboard1)
+    else:
+        bot.send_message(message.chat.id,
+                         f'You {user.username} do not have access to the bot, '
+                         f'contact the creator  !')
+
+
+@bot.message_handler(func=lambda message: message.from_user.id not in user_id)
+def auth(message):
+    bot.send_message(message.chat.id, 'You do not have access to the bot, '
+                                      'contact the creator !')
+
+# def send_cron_text():
+#     mess_data = Readpost()
+#     if len(mess_data) == 2:
+#         for j in range(len(mess_data[0])):
+#             # bot.send_message(message.chat.id, Readpost()[j], reply_markup=keyboard1)
+#             keyboard = types.InlineKeyboardMarkup()
+#             # По очереди готовим текст и обработчик для каждого сообщения
+#             key_j = types.InlineKeyboardButton(text='Text message', callback_data=f'{mess_data[1][j]}')
+#             keyboard.add(key_j)
+#             bot.send_message('391182955',
+#                              f'{mess_data[0][j]}')
+#     else:
+#         bot.send_message('391182955', mess_data)
+
+
+
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+    if message.text.lower() == 'check':
+        mess_data = Readpost()
+        if len(mess_data) == 2:
+            for j in range(len(mess_data[0])):
+                # bot.send_message(message.chat.id, Readpost()[j], reply_markup=keyboard1)
+                keyboard = types.InlineKeyboardMarkup()
+                # По очереди готовим текст и обработчик для каждого сообщения
+                key_j = types.InlineKeyboardButton(text='Text message', callback_data=f'{mess_data[1][j]}')
+                keyboard.add(key_j)
+                bot.send_message(message.chat.id,
+                                 f'{mess_data[0][j]}', reply_markup=keyboard)
+        else:
+            bot.send_message(message.chat.id, mess_data)
+
+    elif message.text.lower() == 'help':
+        bot.send_message(message.chat.id,
+                    'Bot create for checking support email. '
+                    'If you want to connect with developer - dasha@hicell.net')
+
+
+# Обработчик нажатий на кнопки
+@bot.callback_query_handler(func=lambda call: True)
+def callback_worker(call):
+    textik = get_text(call.data)
+    # Отправляем текст в Телеграм
+    if len(textik) > 4096:
+        for x in range(0, len(textik), 4096):
+            bot.send_message(call.message.chat.id, textik[x:x + 4096])
+    else:
+        bot.send_message(call.message.chat.id, textik)
+
+
+# Запускаем постоянный опрос бота в Телеграме
+bot.polling(none_stop=True, interval=0)
+
+
+# функция для проставления флага для всей почты
+# def set_flags():
+#     mail_read_post = mail_post()
+#     result, data = mail_read_post.search(None, 'ALL')
+#     uid_total = (str(data[0]).split('\''))[1].split(' ')
+#     labels = ['bot']
+#     ready1 = []
+#     i = -1
+#     while i > -1000:
+#     # for i in range(7200,(len(uid_total)-1)):
+#         type, ready = mail_read_post.fetch(data[0].split()[i], '(FLAGS)')
+#         print(ready[0])
+#         if str(ready[0]).find(labels[0]) > 0:
+#             i -= 1
+#         else:
+#             types, response = mail_read_post.store(data[0].split()[i],
+#                                            '+FLAGS',
+#                                            r'(%s)' % (labels[0]))
+#
+#             i -= 1
+#             ready1.append(ready)
+#     return ready1
+# mail_post().logout()
+#
+#
+# print(set_flags())
+

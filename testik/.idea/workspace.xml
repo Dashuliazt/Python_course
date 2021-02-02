@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bede3fc0-dce0-4919-8096-d65c5e08435b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/mixins.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/auth.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/create_customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/create_professions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/delete_customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/delete_profession.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/professions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/registration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/reset_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/update_customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/customer/templates/customer/update_profession.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.esm.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testproject/testproject/static/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TEST4 MODULE.py" beforeDir="false" afterPath="$PROJECT_DIR$/../TEST4 MODULE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Telebot/bot/Bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../create_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/../create_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../create_table_in_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/../create_table_in_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw4.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw5 - ver Sasha.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw5 - ver Sasha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw5.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../insert_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../insert_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mult.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mult.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../save_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../save_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tayniy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../tayniy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../telebot.py" beforeDir="false" afterPath="$PROJECT_DIR$/../telebot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test10.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test10.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test11.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test11.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test12.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test12.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test13.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test13.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test14.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test14.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test15.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test15.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test16.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test16.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test17.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test17.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test18.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test18.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test19.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test19.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test21.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test21.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test4-1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test4-1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test4.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test5.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test6.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test7.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test8.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test9.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test9.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/templates/customers/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/news/templates/customers/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/news/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testproject/customer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../testproject/customer/urls.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1ncEksmgpowjNPb5TCFkwvJOV6B" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="testik" type="Python.DjangoServer" factoryName="Django server">
+      <module name="testik" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bede3fc0-dce0-4919-8096-d65c5e08435b" name="Default Changelist" comment="" />
+      <created>1611681124038</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611681124038</updated>
+      <workItem from="1611681125460" duration="107000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

@@ -1,79 +1,47 @@
-d = {}
-d1 = dict()
-d2 = dict(name = 'Alex')
-d3 = dict([('name', 'Alex')])
-d4 = dict.fromkeys(['a', 'b'], 0)
-d = dict(name='Dasha', age=25, len=166, apple=1, course='Python')
-del d['age']
-d.pop('len', None)
-d1 = {'great' : 23, 'bite': 0}
-print(d)
-print(d1)
-d5 = dict(name='Dasha', age=25, len=166, apple=1, course='Python')
-d5.update(d1)
-print(d5)
-d11 = d5.keys()
-print(d11)
-d22 = d5.values()
-print(d22)
-d33 = d5.copy()
-print(d33)
-d33.clear()
-print(d33)
-
-#задача №2
-
-store = {'apple':5, 'orange':10, 'melon':100}
-price = {'apple':45, 'orange':55, 'melon':85}
-store['apple']=7
-price['orange']=62
-print(store)
-print(price)
-store['berry']=122
-price['berry']=99
-store['juice']=24
-price['juice']=20
-print(store)
-print(price)
-total = {'apple':store['apple']*price['apple'], 'orange':store['orange']*
-          price['orange'], 'melon':store['melon']*price['melon'],
-         'all_store': store['apple']+store['orange']+store['melon']}
-sum = {'all_sum': total['apple']+total['orange']+total['melon']}
-h = total.update(sum)
-
-# таска №3
-
-hero = {
-    'health': 100,
-    'gold': 500,
-    'mana': 100,
-    'artefacts' : ['knife', 'shield', 'helmet'],
-    'backpack' : ['mana', 'tablet']
+sample_dict = {
+   "class_a":{ 
+      "student":{ 
+         "name":"Misha",
+         "marks":{ 
+            "math":90,
+            "history":85
+         }
+      }
+   }
 }
-enemy_hero = {
-    'health': 150,
-    'gold': 300,
-    'mana': 100,
-    'artefacts' : ['boots', 'ring'],
-    'backpack' : ['meet']
-}
-
-hero['health'] += 100
-hero['artefacts'].append('sward')
-hero['health'] -=50
-hero['backpack'].remove('tablet')
-hero['gold'] -= 50
-hero['backpack'].append('tablet')
-hero['gold'] -= 100
-hero['artefacts'].remove('knife')
-hero['gold'] -= 200
-hero['artefacts'].append('kolchuga')
-hero.pop('mana', None)
-hero['backpack'].remove('mana')
-hero['health'] /= 2
-hero['gold'] += enemy_hero['gold']
-hero['artefacts'].extend(enemy_hero['artefacts'])
-enemy_hero.clear()
-
-
-
+print(sample_dict["class_a"]['student']['name'])
+print(sample_dict["class_a"]['student']['marks']['history'])
+student1 = {'student1':{'name': 'Nazar', 'marks': {'math': 60, 'history': 55}}}
+sample_dict["class_a"].update(student1)
+print(sample_dict)
+class_b = {'class_b': {'student': {'name': 'Teo', 'marks': {'math': 90, 'history': 85}}, 'student1': {'name': 'Max', 'marks': {'math': 60, 'history': 55}}}}
+sample_dict.update(class_b)
+print(sample_dict)
+sample_dict["class_a"]['student']['marks']['phisics'] = 100
+sample_dict["class_a"]['student1']['marks']['phisics'] = 90
+sample_dict["class_b"]['student']['marks']['phisics'] = 80
+sample_dict["class_b"]['student1']['marks']['phisics'] = 70
+print(sample_dict)
+s = len(sample_dict["class_a"]['student']['marks'])
+k = round(sum(sample_dict["class_a"]['student']['marks'].values())/s, 2)
+t = round(sum(sample_dict["class_a"]['student1']['marks'].values())/s, 2)
+u = round(sum(sample_dict["class_b"]['student']['marks'].values())/s, 2)
+l = round(sum(sample_dict["class_b"]['student1']['marks'].values())/s, 2)
+print(k, t, u, l)
+all_avarage = {sample_dict["class_a"]['student']['name']:k,
+               sample_dict["class_a"]['student1']['name']:t,
+               sample_dict["class_b"]['student']['name']:u,
+               sample_dict["class_b"]['student1']['name']:l}
+print(all_avarage)
+best_stud = max(all_avarage.values())
+print(best_stud)
+best_stud = list(all_avarage.keys())[list(all_avarage.values()).index(best_stud)]
+print(best_stud)
+s = len(sample_dict["class_a"])
+r = round((k+t)/s, 2)
+g = round((u+l)/s, 2)
+print(r, g)
+class_avarage ={list(sample_dict)[0]:r, list(sample_dict)[1]:g}
+print(class_avarage)
+best_class = list(class_avarage.keys())[list(class_avarage.values()).index(max(class_avarage.values()))]
+print(best_class)

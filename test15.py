@@ -1,76 +1,113 @@
-import datetime
-#
-# date = datetime.date(2020, 12, 13)
-# print(date)
-# d = datetime.datetime(2013, 12, 3, 12)
-# print(d)
-# dd = datetime.datetime.fromtimestamp(122220120)
-# print(dd)
-# frd = datetime.datetime.now().strftime('%d.%m.%Y')
-# print(frd)
-# delta = datetime.timedelta()
-# print(delta)
-# print(datetime.datetime.now()+delta)
-# frad = datetime.datetime.now().strftime('%a')
-# print(frad)
+import shutil
+
+# копирование файла
+# shutil.copy('test.py', 'ders')
+# скопирование папки со всем содержимым в другую папку
+# shutil.copytree('Задание', 'Task')
+# переместить файл с текущей папки в папку
+# shutil.move('all.txt', 'Task')
+# удаление папки целиком
+# shutil.rmtree('Task')
+# проверка места на диске
+# shutil.disk_usage('C:')
+
 # import sys
-# print(sys.argv)
-
-
-import os
-import datetime
-
-#task 1
-# def my_gen(dirname):
-#     for el in os.listdir(dirname):
-#         obj = os.path.join(dirname, el)
-#         create = datetime.datetime.fromtimestamp(os.path.getctime(obj))
-#         change = datetime.datetime.fromtimestamp(os.path.getmtime(obj))
-#         yield f'{create} и была изменена {change}'
 #
-# for el in my_gen('Задание'):
-#     print(el)
+# def my_sum(x,y):
+#     return x+y
+# params = sys.argv
+# print(my_sum(params[1],params[2]))
 
-#task 2
-# def NY():
-#     now = datetime.datetime.today()
-#     NY = datetime.datetime(2021,1,1)
-#     d = NY-now
-#     print('До нового года осталось: {} дней'.format(d.days))
 #
-# NY()
+# import argparse
+# def my_sum(x,y):
+#     return x+y
+# parser = argparse.ArgumentParser(description='First my app')
+# parser.add_argument('a', type=int, help='first digit')
+# parser.add_argument('b', type=int, help='second digit')
+# parser.add_argument('-s', '--sum', action='store')
+# # parser.add_argument('-s', '--sum', action='count') # считает кол-во -s
+# args = parser.parse_args()
+# print(my_sum(args.a, args.b))
+# if args.sum:
+#   print(my_sum(args.a,args.b))
+# else:
+#     print('OOps')
 
-#task 3
-import sys
+# nargs - in nargs - write count elem, if =* nothing ograni4eniy
+# choice = [] - пропісиваем возможние варіанти ввода
+# dest='summa' - переименование мени обьекта -
+# но прописывает только в не обязат параметрах,
+# те которые имеют тире перед переменной
 
-# for el in sys.argv:
-#     if el == '-t':
-#         print(datetime.datetime.now().time())
-#     elif el == '-d':
-#         print(datetime.datetime.now().date())
-#     elif el == '-dt':
-#         print(datetime.datetime.now())
+# import argparse
+# def my_sum(x,y):
+#     return x+y
+# parser = argparse.ArgumentParser(description='First my app')
+# # parser.add_argument('digits', nargs=2, help='please enter 2 element')
+# parser.add_argument('digits', choices=[1, 2, 3], type=int)
+# parser.add_argument('-s', '--sum', action='count', dest='summa')
+# args = parser.parse_args()
+# print(args)
+
+# import requests
+# import argparse
+# def get(url):
+#     return requests.get(url)
+#
+# def save(filename, text):
+#     with open(f'{filename}.html', 'w') as file:
+#         file.write(text)
+#
+# def save_picture(filename, content, extension):
+#     with open(f'{filename}.{extension}', 'wb') as file:
+#         file.write(content)
+#
+#
+#
+# def check_url(url):
+#     if 'png'==url[-3:]:
+#         return True, 'png'
 #     else:
-#         pass
-
-#task 4
-
-# def dated(YEAr):
+#         return False, None
 #
-#     return datetime.datetime(YEAr, 1, 1).strftime('%A')
 #
-# print(dated(2021))
-
-#task 5
-# def dated(dbay_date, year_choice):
-#     day, month, year = dbay_date.split('.')
-#     return datetime.datetime(int(year_choice), int(month), int(day)).strftime('%A')
+# def main():
+#     parser = argparse.ArgumentParser(description='My first console app')
+#     parser.add_argument('url', type=str, help='url for get')
+#     parser.add_argument('-s', '--status', action='store_true')
+#     parser.add_argument('-t', '--text',  action='store_true')
+#     parser.add_argument('-S', '--save_html', nargs=1, type=str, action='store')
+#     parser.add_argument('-p', '--picture', nargs=1, action='store')
+#     args = parser.parse_args()
+#     response=get(args.url)
+#     check = check_url(args.url)
+#     if args.status:
+#         print(response.status_code)
+#     elif args.text:
+#         print(response.text)
+#     elif args.save_html:
+#         save(args.save_html[0], response.text)
+#     elif check[0]:
+#         save_picture(args.picture, response.content, check[1])
 #
-# print(dated('01.04.1995', '2021'))
+# main()
+import shutil
+import argparse
+def copy_file(filename_copy, filename_new):
+    shutil.copy(filename_copy, filename_new)
 
-#task 6
-def dated(dbay_date):
-    day, month, year = dbay_date.split('.')
-    return datetime.datetime(int(year), int(month), int(day)).strftime('%-j')
 
-print(dated('01.04.1995'))
+def move_file(filename_new):
+    shutil.move(filename_new, 'Задание')
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Second my console app')
+    parser.add_argument('-s', '--save', nargs=2, action='store')
+    args = parser.parse_args()
+    copy_file(args.save[0], args.save[1])
+    move_file(args.save[1])
+
+
+main()

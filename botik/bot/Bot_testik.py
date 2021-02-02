@@ -24,7 +24,7 @@ def Readpost():
             raise Exception("Error reading inbox: {}".format(data))
         if data == ['0']:
             return 'None'
-        labels = ['test23']
+        labels = ['test30']
         i=-5
         res1 = []
         text1 = []
@@ -74,12 +74,9 @@ def Readpost():
 
 
 
-#print(len(Readpost()))
-# print(len(Readpost()))
-# print(Readpost())
-#
-#
+# print(Readpost()[1][0])
 
+# print(Readpost())
 
 
 bot = telebot.TeleBot('1462574234:AAHBZLLLZ2V3BJKWroScV1vGOtmXs2dGg-A')
@@ -108,16 +105,15 @@ def send_text(message):
     elif message.text.lower() == 'пока':
         bot.send_message(message.chat.id, 'Прощай, создатель')
 
+
 # Обработчик нажатий на кнопки
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    # Если нажали на одну из 12 кнопок — выводим гороскоп
     j = int(str(call.data)[-1])
     if call.data == f"textmess{j}":
-        #Формируем гороскоп
-        msg = Readpost()[1][j]
+        # msg = Readpost()[1][j]
         # Отправляем текст в Телеграм
-        bot.send_message(call.message.chat.id, msg)
+        bot.send_message(call.message.chat.id, 'traet')
 
 
 

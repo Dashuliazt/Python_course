@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+
+{% endblock %}
+{% block content %}
+    <form method="post" action="{% url 'delete-customer' object.id %}" class="form-control">
+        {% csrf_token %}
+        <h1 class="text-center mt-5">Вы хотите удалить {{ object }}?</h1>
+        <div class="text-center mt-5">
+            <a class="text-secondary mr-5" href="{% url 'customer-list' %}">Отмена</a>
+            <button class="btn btn-danger mr-5" type="submit">Удалить</button>
+        </div>
+    </form>
+{% endblock %}
+</body>
+</html>

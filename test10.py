@@ -1,94 +1,51 @@
-# def column(g):
-#     for i in range(g):
-#         print(i)
-# column(20)
-
+# a =[]
+# def my_sum(s,c,k):
+#     for i in range(c):
+#         a.append(k)
+#     for j in range(s):
+#         print (a)
+# my_sum(3,5,1)
 
 # task 2
-# def pow2(l):
-#     h = l ** (1/2)
-#     print(h)
-# pow2(25)
-#
-#
+# a =[]
+# def my_sum(s,c,k=0):
+#     for i in range(c):
+#         a.append(k)
+#     for j in range(s):
+#         print (a)
+# my_sum(3,5)
+
 # # task 3
-# def longnum():
-#     num = input('Просьба ввести цисло больше 5 цифр')
-#     if len(num) >= 5:
-#         for i in num:
-#             print(i)
-#     else:
-#         print('Просьба ввести число более 5 символов')
-# longnum()
-
-
+#
+# upper = lambda x: x.upper()
+# print(upper('dddd'))
+#
 # # task 4
-# def nonefile(s):
-#     name = s + '.txt'
-#     f = open (name, 'w')
-# nonefile(input('Просьба ввести имя файла'))
+# import string
+# k =[]
+# for i in string.ascii_lowercase:
+#     k.append(i)
+# print(list(map(upper, k)))
 
 # task 5
 
-
+# import string
+# import random
+# def low_up():
+#     k = random.sample(string.ascii_letters, 10)
+#     print(k)
+#     for i in range(len(k)):
+#          if str(k[i]).isupper():
+#             k[i] = str(k[i]).replace(k[i],str(k[i]).lower())
+#     print(k)
 #
-# def key(n, name):
-#     file_name = name + '.txt'
-#     f = open(file_name, 'w')
-#     letter_abc = list(string.ascii_letters)
-#     digits_012 = list(string.digits)
-#     letter_abc.extend(digits_012)
-#     all_list = ''.join(random.sample(letter_abc, n))
-#     f.write(all_list)
-# key(11, 'keys')
+# low_up()
+# task 5 - 2
+# import string
+# import random
+# print(list(map(lambda x: str(x).replace(x, str(x).lower()),
+#                 random.sample(string.ascii_letters, 10))))
+# task 6
 
 
-# # task 6
-# def only_list(d):
-#     print(d)
-#     if type(d) is list:
-#         print(set(d))
-#     else:
-#         print('None')
-#
-# only_list(list('ABCDDSA'))
-
-
-#task 7
-# def tuple_list(i, j):
-#     a =[]
-#     if type(j) is list or type(i) is list or type(j) is tuple or type(i) is tuple:
-#         a = list(set(i) - set(j))
-#         a.extend(list(set(j) - set(i)))
-#         print(a)
-#     else:
-#         print('Error on your type')
-#
-# tuple_list(tuple('asaas'),list('far'))
-
-# task 8
-random_string='zxccvbnm'
-def counter(string):
-    result = {el:0 for el in string}
-    for i in string:
-        result[i] +=1
-    return result
-
-print(counter(random_string))
-
-
-# task 9
-def max_word(filename):
-    try:
-        with open(filename, encoding='utf-8') as file:
-            words = file.read().replace(',', '').replace('.','').lower().split()
-            counter_dict = counter(words)
-            max_index = list(counter_dict.values()).index(max(counter_dict.values()))
-            max_word = list(counter_dict.keys())[max_index]
-            return max_word
-    except FileNotFoundError:
-        return None
-print(max_word('NEW.txt'))
-
-
-
+print(list((map(lambda x : x if x%3 == 0 else 0, [i for i in range(-20,20)]))))

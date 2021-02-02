@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram bot 'SupportBot'
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www
+ExecStart=/usr/bin/python3 /var/www/Bot_testik.py
+RestartSec=10
+Restart=always
+ 
+[Install]
+WantedBy=multi-user.target

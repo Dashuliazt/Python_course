@@ -1,116 +1,62 @@
-# # #генератор №1 создание функциями
-# # def my_gen(num):
-# #     for i in range(num):
-# #         yield i
-# # # обьект генератора
-# # m = my_gen(10)
-# # print(m)
-# # print(next(m))
-# # print(next(m))
-# # print(next(m))
-# #
-# # #генератор №2
-# # my_gen1 = (x for x in range(10))
-# # print(my_gen1)
-# # for i in my_gen1:
-# #     print(i)
-# #
-# #
-# # import datetime
-# # import time
-# #
-# # def my_dec(func):
-# #     def wrapper(num, p):
-# #         with open('log.txt', 'a+') as file:
-# #             start = time.time()
-# #             result = func(num, p)
-# #             finish = time.time()
-# #             file.write(f'name func - {func.__name__} '
-# #                        f'start - {datetime.datetime.fromtimestamp(start)}'
-# #                        f'result func- {result} params{num, p} '
-# #                        f'lead time - {finish-start}\n')
-# #     return wrapper
-# #
-# # @my_dec
-# # def my_pow(num, p):
-# #     return num**p
-# #
-# # my_pow(2,8)
-# # my_pow(12322,22228)
-#
-# def my_dec(name_dec='dec_1'):
-#     def dec_1(func):
-#         def wrapper(num, p):
-#             return func(num,p)*2
-#         return wrapper
-#     def dec_2(func):
-#         def wrapper(num, p):
-#             return list(range(func(num,p)))
-#         return wrapper
-#     def dec_3(func):
-#         def wrapper(num,p):
-#             with open('dec3.txt','w') as file:
-#                 file.write(f'{func(num,p)}\n')
-#         return wrapper
-#     if name_dec == dec_1:
-#         return dec_1
-#     elif name_dec == dec_2:
-#         return dec_2
-#     elif name_dec == dec_3:
-#         return dec_3
-#     else:
-#         pass
+# import random
 #
 #
-# @my_dec('dec_2')
-# def my_pow(num, p):
-#     return num**p
+# def main():
+#     names = 'Travis', 'Eric', 'Bob', 'Rose', 'Jessica', 'Anabel'
+#     while True:
+#         targets = random.sample(names, len(names))
+#         if not any(a == b for a, b in zip(targets, names)):
+#             break
+#     for source, target in zip(names, targets):
+#         list_a = '{} will give to {}.'.format(source, target)
+#         print(list_a)
 #
-# print(my_pow(2, 2))
-
-# def dec_size_prem(perc):
-#     def dec_premiya(func):
-#         def wrapper(for_hour,hours_for_days, day_foe_week):
-#             return func(for_hour,hours_for_days, day_foe_week) * (1 + perc/100)
-#         return wrapper
-#     return dec_premiya
 #
-# @dec_size_prem(35)
-# def zp(for_hour,hours_for_days, day_foe_week):
-#     zp = for_hour*hours_for_days*day_foe_week*4
-#     return zp
-#
-# print(zp(100,8,5))
-
-#task 3
+# if __name__ == '__main__':
+#     main()
 import random
 
-
-def dec_sum(func):
-    def wrapper():
-        list = func()
-        list.sort(key=lambda x: sum(int(i) for i in str(x)))
-        return list
-    return wrapper
-
-
-@dec_sum
-def sto():
-    return random.sample(range(10,1000),5)
-
-print(sto())
+def pick_recipient(group, recipients, single_flag):
+    for person in group:
+        gift = random.choice(recipients)
+        if single_flag == 0:
+            while gift in group:
+                gift = random.choice(recipients)
+        else:
+            while gift in person:
+                gift = random.choice(recipients)
+        mail_list.append('%s=%s' % (person, gift))
+        recipients.remove(gift)
+    return recipients
 
 
+if __name__ == "__main__":
+    global mail_list
+    mail_list = []
 
+    # create lists of people, group couples at beginning or end of list and the singles opposite
+    all_recipients = ['name_1-CoupleA: name_1-CoupleA@gmail.com',
+                      'name_2-CoupleA: name_2-CoupleA@gmail.com',
+                      'name_3-CoupleB: name_3-CoupleB@hotmail.com',
+                      'name_4: name_4CoupleB@hotmail.com',
+                      'name_5-Single: name_5-Single@gmail.com',
+                      'name_6-Single: name_6-Single@gmail.com']
 
+    # create couples and lists of singles to make sure couples don't get their other half
+    # modify the groups to match the list of people from above
+    coupleA = all_recipients[0:2]
+    coupleB = all_recipients[2:4]
+    single = all_recipients[4:]
 
+    # keep initial list in tact
+    possible_recipients = all_recipients
 
+    # modify the groups to match what the input list is
+    possible_recipients = pick_recipient(coupleA, possible_recipients,
+                                         single_flag=0)
+    possible_recipients = pick_recipient(coupleB, possible_recipients,
+                                         single_flag=0)
+    possible_recipients = pick_recipient(single, possible_recipients,
+                                         single_flag=1)
 
-
-
-
-
-
-
-
-
+    print (mail_list)

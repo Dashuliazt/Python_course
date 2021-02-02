@@ -1,68 +1,79 @@
-import string
-import random
-import re
-# таска 1
-x = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-x.reverse()
-print(x)
-x.insert(0, 21)
-x.append(9)
-x.remove(20)
-del x[2]
-x.sort()
-k = sum(x)
-print(k)
-# таска 2
-number = int(input('Введите число от 10 до 30'))
-letter_abc = list(string.ascii_letters[0:9])
-letter_def = list(string.ascii_letters[10::])
-digits_012 = list(string.digits)
-letter_abc.extend(letter_def)
-letter_abc.extend(digits_012)
-all_list = '' .join(random.sample(letter_abc, number))
-print(all_list)
+d = {}
+d1 = dict()
+d2 = dict(name = 'Alex')
+d3 = dict([('name', 'Alex')])
+d4 = dict.fromkeys(['a', 'b'], 0)
+d = dict(name='Dasha', age=25, len=166, apple=1, course='Python')
+del d['age']
+d.pop('len', None)
+d1 = {'great' : 23, 'bite': 0}
+print(d)
+print(d1)
+d5 = dict(name='Dasha', age=25, len=166, apple=1, course='Python')
+d5.update(d1)
+print(d5)
+d11 = d5.keys()
+print(d11)
+d22 = d5.values()
+print(d22)
+d33 = d5.copy()
+print(d33)
+d33.clear()
+print(d33)
 
-# таска 3
-dtb = input('Введите Вашу дату рождения в формате дд.мм.ГГГГ:')
-r = input('Введите ваш рост:')
-m = input('введите ваш вес:')
-dtb1 = input('Введите дату рождения вашего родственника формате дд-мм-ГГГГ:')
-fdf = dtb.split('.', 2)
-fdf1 = dtb1.split('-', 2)
-list_all = [r, m, fdf]
-fdf.extend(fdf1)
-list_all = [r, m, fdf]
-dtb_all = list_all.pop(2)
-list_all, dtb_all = dtb_all, list_all
-print(list_all, dtb_all)
+#задача №2
 
-# таска 4
+store = {'apple':5, 'orange':10, 'melon':100}
+price = {'apple':45, 'orange':55, 'melon':85}
+store['apple']=7
+price['orange']=62
+print(store)
+print(price)
+store['berry']=122
+price['berry']=99
+store['juice']=24
+price['juice']=20
+print(store)
+print(price)
+total = {'apple':store['apple']*price['apple'], 'orange':store['orange']*
+          price['orange'], 'melon':store['melon']*price['melon'],
+         'all_store': store['apple']+store['orange']+store['melon']}
+sum = {'all_sum': total['apple']+total['orange']+total['melon']}
+h = total.update(sum)
 
-rr = int(input('Введите двухзначное число:'))
-rrrr = int(input('Введите четырёхзначное число:'))
-list_rr = random.sample(range(rr, rrrr), 10)
-list_rr_max = list_rr.index(max(list_rr))
-list_rr_min = list_rr.index(min(list_rr))
-list_rr[list_rr_max],list_rr[list_rr_min] = list_rr[list_rr_min], \
-                                            list_rr[list_rr_max]
-print(list_rr)
+# таска №3
 
-# таска 5
+hero = {
+    'health': 100,
+    'gold': 500,
+    'mana': 100,
+    'artefacts' : ['knife', 'shield', 'helmet'],
+    'backpack' : ['mana', 'tablet']
+}
+enemy_hero = {
+    'health': 150,
+    'gold': 300,
+    'mana': 100,
+    'artefacts' : ['boots', 'ring'],
+    'backpack' : ['meet']
+}
 
-list_first = random.sample(range(10, 100), 10)
-list_sec = random.sample(range(10, 100), 10)
-list_third = random.sample(range(10, 100), 10)
-list_all = [list_first, list_sec, list_third]
-list_all[2][7], list_all[2][8], list_all[2][9] = list_all[0][0], list_all[0][1], \
-                                               list_all[0][2]
-list_all[0][7], list_all[0][8], list_all[0][9] = list_all[2][0], list_all[2][1],\
-                                                 list_all[2][2]
-print(list_all)
-list_all[1][:5] = list_all[0][:5]
-list_all[0][5:] = list_all[1][5:]
-print(list_all)
+hero['health'] += 100
+hero['artefacts'].append('sward')
+hero['health'] -=50
+hero['backpack'].remove('tablet')
+hero['gold'] -= 50
+hero['backpack'].append('tablet')
+hero['gold'] -= 100
+hero['artefacts'].remove('knife')
+hero['gold'] -= 200
+hero['artefacts'].append('kolchuga')
+hero.pop('mana', None)
+hero['backpack'].remove('mana')
+hero['health'] /= 2
+hero['gold'] += enemy_hero['gold']
+hero['artefacts'].extend(enemy_hero['artefacts'])
+enemy_hero.clear()
 
-list_one_all.extend(list_first)
-list_one_all.extend(list_sec)
-list_one_all.extend(list_third)
-print(list_one_all)
+
+

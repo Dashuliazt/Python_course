@@ -1,64 +1,64 @@
-import string
+def encrypt(filename, filename_before, key=1):
+    with open(f'{filename}.txt') as file, \
+        open(f'{filename_after}.txt', 'w', encoding="utf-8") as file1:
+        file1.write(
+            ''.join(list(map(lambda x: chr(ord(x)+key), file.read())))
+        )
 
-shfr = input('Вы хотите зашифровать(Z) либо расшифровать(R) Ваш файл').upper()
+
+def decrypt(filename, filename_after, key=1):
+    with open(f'{filename}.txt') as file, \
+        open(f'{filename_after}.txt', 'w', encoding="utf-8") as file1:
+        file1.write(
+            ''.join(list(map(lambda x: chr(ord(x)-key), file.read())))
+        )
 
 
-def file_for_work():
+def check_file(filename):
+    try:
+        with open(f'{filename}.txt') as file:
+            return True
+    except FileNotFoundError:
+        return False
+
+
+def check_key(new_key):
+    try:
+        int(new_key)
+        return True
+    except ValueError:
+        return False
+
+
+def main():
     while True:
-        try:
-            name_file = input('Введите имя исходного файла')
-            with open(name_file + '.txt') as file:
-                lines_file = file.readlines()
-            return lines_file
-        except FileNotFoundError:
-            print('Ошибка: Просьба ввести существующий файл')
-            break
-
-
-def work_with_ans(shfr):
-    while True:
-        try:
-            if shfr == 'Z':
-                key_z = int(input('Ключ сдвига'))
-            elif shfr == 'R':
-                key_z = int(input('Ключ сдвига'))
-                key_z = - key_z
+        question = input('1.Encrypt \n2. Decrypt \n3. Exit')
+        if question in '123':
+            if question == '1':
+                filename_for_encrypt = input('Enter name file for encrypt')
+                new_key = input('Enter key for cezar')
+                if check_file(filename_for_encrypt) and check_key(new_key):
+                    name_file_after = input('Enter name file after encrypt')
+                    encrypt(filename_for_encrypt,
+                            name_file_after,
+                            key=int(new_key))
+                    break
+                else:
+                    print('file for encrypt or key incorrect')
+                    continue
+            if question == '2':
+                filename_for_decrypt = input('Enter name file for encrypt')
+                new_key = input('Enter key for cezar')
+                if check_file(filename_for_decrypt) and check_key(new_key):
+                    name_file_after = input('Enter name file after encrypt')
+                    decrypt(filename_for_decrypt,
+                            name_file_after,
+                            key=int(new_key))
+                    break
             else:
-                print('Ошибка: Введите верное значение')
                 break
-        except ValueError:
-            print('Ошибка: Просьба ввести цифру')
-            break
-        return key_z
-
-
-def caesar_shifr():
-    lines_file = file_for_work()
-    key_z = work_with_ans(shfr)
-    shifr_after = []
-    for i in range(len(lines_file[0])):
-        # проверка буква ли это
-        if lines_file[0][i].isalpha():
-            # проверка большая буква или маленькая
-            if lines_file[0][i].isupper():
-                abc = string.ascii_uppercase
-            else:
-                abc = string.ascii_lowercase
-            j = abc.find(lines_file[0][i])
-            k = j + int(key_z)
-            # проверка или не выходит за кол-во букв в алфавите
-            if k >= len(string.ascii_lowercase):
-                g = abc[k - len(string.ascii_lowercase)]
-            else:
-                g = abc[k]
         else:
-            g = lines_file[0][i]
-        shifr_after.append(g)
-    shifrs = ''.join(shifr_after)
-    name_file_z = input('Введите имя файла для вывода результата')
-    with open(name_file_z + '.txt', 'w+') as file:
-        file.write(shifrs)
-    return file
+            print('Try again')
+            continue
 
-
-caesar_shifr()
+main()

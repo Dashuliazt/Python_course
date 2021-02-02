@@ -1,25 +1,9 @@
-class Human:
-    default_name = 'Dariia'
-    default_age = 25
+import telebot
 
-    def __init__(self, default_name, default_age, money, house):
-        self.age = default_age
-        self.name = default_name
-        self.__money = money
-        self.__house = house
+bot = telebot.TeleBot('1462574234:AAHBZLLLZ2V3BJKWroScV1vGOtmXs2dGg-A')
 
-    def info(self):
-        print(f'Имя - {self.name} \nВозраст {self.age} \nДом - {self.__house} \nДеньги - {self.__money}')
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
 
-    @staticmethod
-    def default_info(default_name, default_age):
-        print(f'Имя {default_name} Возраст {default_age}')
-
-
-
-
-
-
-
-hun = Human('Dariia', 12, '1000','Пентхаус')
-hun.default_info()
+bot.polling()
